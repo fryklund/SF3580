@@ -1,6 +1,6 @@
 #todo: Which norm to use? Don't think it matters.
 
-function power_iteration(A,x,tol,l_exact=nothing)
+function power_iteration(A,x,tol,allData = false)
     # Input
     # A: matrix to perform power method on
     # x: starting vector
@@ -13,41 +13,27 @@ function power_iteration(A,x,tol,l_exact=nothing)
 
     v = x / norm(x); # Normalize starting vector
     itr_max = 100; # Maximum allowed number of iterations
-    l = 1; # Dummy
-    itr = 0; # Iteration counter
-    v_old = v; # save previous values
-    l_old = l; # save previous values
+    itr = 1; # Iteration counter
 
-    if l_exact == nothing
+    lv = Array{Float64}(undef, itr_max);
+    lv[1] = 1;
         while itr < itr_max
+            v_old = v; # save previous value
+            itr += 1;
             w = A * v;
             v = w / norm(w);
-            l = reshape(v' * A * v,1)[1];
-            itr += 1;
-            if (abs(l-l_old) < tol) && (norm(v-v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within
-                return v,l
+            lv[itr] = v' * A * v; # Wan to work around this.
+            if (abs(lv[itr]-lv[itr-1]) < tol) && (norm(v-v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within tolerance
+                if allData
+                    lv = lv[1:itr];
+                else
+                    lv = lv[itr];
+                end
+
+                return v,lv
             end
-            v_old = v;
-            l_old = l;
+
         end
         println("Did not converge within ",itr_max," iterations.")
         return nothing,nothing
-    else
-        l_itr = zeros(itr_max,1);
-        while itr < itr_max
-            w = A * v;
-            v = w / norm(w);
-            l = reshape(v' * A * v,1)[1];
-            itr += 1;
-            l_itr[itr] = l;
-            if (abs(l-l_old) < tol) && (norm(v-v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within
-                 l_itr = l_itr[1:itr];
-                return v,l
-            end
-            v_old = v;
-            l_old = l;
-        end
-        println("Did not converge within ",itr_max," iterations.")
-        return nothing,nothing
-    end
 end
