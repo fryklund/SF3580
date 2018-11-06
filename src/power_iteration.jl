@@ -15,22 +15,22 @@ function power_iteration(A,x,tol,allData = false)
     itr_max = 100; # Maximum allowed number of iterations
     itr = 1; # Iteration counter
 
-    lv = Array{Float64}(undef, itr_max);
-    lv[1] = 1;
+    l = Array{Float64}(undef, itr_max);
+    l[1] = 1;
         while itr < itr_max
             v_old = v; # save previous value
             itr += 1;
             w = A * v;
             v = w / norm(w);
-            lv[itr] = v' * A * v; # Wan to work around this.
-            if (abs(lv[itr]-lv[itr-1]) < tol) && (norm(v-v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within tolerance
+            l[itr] = v' * A * v; # Wan to work around this.
+            if (abs(l[itr]-l[itr-1]) < tol) && (norm(v-v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within tolerance
                 if allData
-                    lv = lv[1:itr];
+                    l = l[1:itr];
                 else
-                    lv = lv[itr];
+                    l = l[itr];
                 end
-
-                return v,lv
+                println("Converge in ",itr-1," iterations.")
+                return v,l
             end
 
         end

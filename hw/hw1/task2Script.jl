@@ -2,24 +2,59 @@ using PyCall
 using PyPlot
 using LinearAlgebra
 include("../../src/power_iteration.jl")
+include("../../src/rayleigh_quotient.jl")
+
 A = [1 2 3; 2 2 2; 3 2 9];
-x = ones(3);
-tol = 1e-12;
-all_itr = true; # Set true if power_iteration is to return a iterations for the eigenvalue. Or leave blank
-v,l = power_iteration(A,x,tol,all_itr)
-if l == nothing
-        exit()
-end
-println(v)
-println(l[end])
-if all_itr
-    E = eigvals(A);
-    l_true = E[argmax(abs.(E))];
-    errorEval = abs.(l-l_true*ones(length(l)));
+E = eigvals(A);
+x0 = ones(3);
+
+
+#############################
+#########     a   ###########
+#############################
+println("Power iteration")
+tol_pi = 1e-12;
+all_itr_pi = true; # Set true if power_iteration is to return a iterations for the eigenvalue. Or leave blank
+v_pi,l_pi = power_iteration(A,x0,tol,all_itr_pi)
+if l_pi != nothing
+println(v_pi)
+println(l_pi[end])
+if all_itr_pi
+    n_pi = length(l_pi);
+    l_max = E[argmax(abs.(E))];
+    error_pi = abs.(l_pi-l_max*ones(n_pi));
     println("Plotting")
     figure()
-    semilogy(errorEval,"r-o");
+    semilogy(error_pi + ones(n_pi) * 10^(-14),"r-o");
     xlabel("Iteration number")
     ylabel("Error maximal eigenvalue")
+    xticks(0:n_pi-1)
+    title("Power iteration")
     savefig("task2a.png")
+end
+end
+println(" ")
+#############################
+#########     b   ###########
+#############################
+println("Rayleigh quotient")
+tol_rq = 1e-12;
+all_itr_rq = true; # Set true if power_iteration is to return a iterations for the
+v_rq,l_rq = rayleigh_quotient(A,x0,10,tol_rq,all_itr_rq);
+if l_rq != nothing
+println(v_rq)
+println(l_rq[end])
+if all_itr_rq
+    n_rq = length(l_rq);
+    l_sim_rq = E[argmin(abs.(E-l_rq[end]*ones(3)))]
+    error_rq = abs.(l_rq-l_sim_rq * ones(n_rq));
+    println("Plotting")
+    figure()
+    semilogy(error_rq + ones(n_rq) * 10^(-14),"r-o");
+    xlabel("Iteration number")
+    ylabel("Error maximal eigenvalue")
+    title("Rayleigh quotient for largest eigenvalue")
+    xticks(0:n_rq-1)
+    savefig("task2b.png")
+end
 end
