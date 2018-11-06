@@ -10,11 +10,17 @@ l[1] = mu;
 
 while itr < itr_max
     v_old = v;
-    w = (A - l[itr] * Id) \ v;
+    B = (A - l[itr] * Id);
+    if cond(B,2) > 1e12
+        println("Matrix singular after ",itr-1," iterations.")
+        l = l[1:itr];
+        return v,l
+    end
+    w = B \ v;
     v = w / norm(w);
     itr += 1;
     l[itr] = v' * A * v;
-    if (abs(l[itr]-l[itr-1]) < tol) && (norm(v-v_old)<tol||norm(v+v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within tolerance
+    if abs(l[itr]-l[itr-1]) < tol && (norm(v-v_old)<tol||norm(v+v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within tolerance
         if allData
             l = l[1:itr];
         else
@@ -23,7 +29,6 @@ while itr < itr_max
         println("Converge in ",itr-1," iterations.")
         return v,l
     end
-
 end
 println("Did not converge within ",itr_max," iterations.")
 return nothing,nothing

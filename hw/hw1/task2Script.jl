@@ -5,15 +5,15 @@ include("../../src/power_iteration.jl")
 include("../../src/rayleigh_quotient.jl")
 
 A = [1 2 3; 2 2 2; 3 2 9];
-E = eigvals(A);
+E_A = eigvals(A);
 x0 = ones(3);
 
 
 #############################
 #########     a   ###########
 #############################
-println("Power iteration")
-tol_pi = 1e-12;
+println("2.a: Power iteration")
+tol_pi = 1e-10;
 all_itr_pi = true; # Set true if power_iteration is to return a iterations for the eigenvalue. Or leave blank
 v_pi,l_pi = power_iteration(A,x0,tol,all_itr_pi)
 if l_pi != nothing
@@ -21,7 +21,7 @@ println(v_pi)
 println(l_pi[end])
 if all_itr_pi
     n_pi = length(l_pi);
-    l_max = E[argmax(abs.(E))];
+    l_max = E_A[argmax(abs.(E_A))];
     error_pi = abs.(l_pi-l_max*ones(n_pi));
     println("Plotting")
     figure()
@@ -35,18 +35,26 @@ end
 end
 println(" ")
 #############################
-#########     b   ###########
-#############################
-println("Rayleigh quotient")
+#     SETUP FOR REYLEIGH QUOTIENT
+mu0 = 0;
 tol_rq = 1e-12;
 all_itr_rq = true; # Set true if power_iteration is to return a iterations for the
-v_rq,l_rq = rayleigh_quotient(A,x0,10,tol_rq,all_itr_rq);
+B = [1 2 4; 2 2 2; 3 2 9];
+E_B = eigvals(B);
+tol_rq = 1e-12;
+all_itr_rq = true; # Set true if power_iteration is to return a iterations for the
+
+#############################
+#########     b   ###########
+#############################
+println("2.b: Rayleigh quotient")
+v_rq,l_rq = rayleigh_quotient(A,x0,mu0,tol_rq,all_itr_rq);
 if l_rq != nothing
 println(v_rq)
 println(l_rq[end])
 if all_itr_rq
     n_rq = length(l_rq);
-    l_sim_rq = E[argmin(abs.(E-l_rq[end]*ones(3)))]
+    l_sim_rq = E_A[argmin(abs.(E_A-l_rq[end]*ones(3)))]
     error_rq = abs.(l_rq-l_sim_rq * ones(n_rq));
     println("Plotting")
     figure()
@@ -58,3 +66,29 @@ if all_itr_rq
     savefig("task2b.png")
 end
 end
+println(" ")
+#############################
+#########     c   ###########
+#############################
+println("2.c: Rayleigh quotient with non-symmetric A")
+# Only symmetric part is present in Rayleigh quotient. A = 0.5 * (A+A') + 0.5 * (A-A')
+# x0'*B*x0 - x0' * (0.5*(B+B'))*x0
+v_rq,l_rq = rayleigh_quotient(B,x0,mu0,tol_rq,all_itr_rq);
+if l_rq != nothing
+println(v_rq)
+println(l_rq[end])
+if all_itr_rq
+    n_rq = length(l_rq);
+    l_sim_rq = E_B[argmin(abs.(E_B-l_rq[end]*ones(3)))]
+    error_rq = abs.(l_rq-l_sim_rq * ones(n_rq));
+    println("Plotting")
+    figure()
+    semilogy(error_rq + ones(n_rq) * 10^(-14),"r-o");
+    xlabel("Iteration number")
+    ylabel("Error maximal eigenvalue")
+    title("Rayleigh quotient for non-symmetric matrix")
+    xticks(0:n_rq-1)
+    savefig("task2c.png")
+end
+end
+println(" ")
