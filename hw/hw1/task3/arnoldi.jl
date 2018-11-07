@@ -1,10 +1,14 @@
 using LinearAlgebra
 
-#Random.seed!(0);
-A=randn(100,100)
-b = randn(100)
+include("../../../src/gs_methods.jl")
 
-function arnoldiSGS(A,b,m::Number)
+#using Pkg
+#Pkg.add("MatrixDepot")
+#Pkg.add("BenchmarkTools")
+using MatrixDepot, Random, BenchmarkTools
+
+
+function arnoldiGS(A,b,m::Number)
 # % [Q,H]=arnoldi(A,b,m)
 # % A simple implementation of the Arnoldi method.
 # % The algorithm will return an Arnoldi "factorization":
@@ -20,23 +24,17 @@ function arnoldiSGS(A,b,m::Number)
 # %  should_be_zero2=norm(Q'*Q-eye(m+1))
 
     n=length(b)
-
     Q=zeros(n,m+1)
-
     Q[:,1]=b./norm(b)
-
     H = zeros(m+1,m)
-
-    t0=0
-    t1=0
 
     for k=1:m
         w=A*Q[:,k]; # Matrix-vector product
                     #with last element
-        println(Q)
+
         # Orthogonalize w against columns of Q
        # replace this with a orthogonalization
-        h,beta,worth=tripleGS(Q,w,k);
+        h,beta,worth=singleGS(Q,w,k);
 
         # Put Gram-Schmidt coefficients into H
         H[1:(k+1),k]=[h[1:k];beta];
@@ -48,9 +46,19 @@ function arnoldiSGS(A,b,m::Number)
 end
 
 
+function testArnoldi(m)
+     #size of matrix
 
+    Random.seed!(0)
+    nn  = 500 #determines size of matrix A
+    AA=matrixdepot("wathen",nn,nn)
+    b = randn(size(AA,1))
+    k =m
 
-m = 5
-Q,H = arnoldiSGS(A,b,m)
-println(opnorm(Q'*Q-I))
-println(opnorm(Q*H-A*Q[:,1:m]))
+    @btime begin
+        global Q, H = arnoldiGS($AA,$b,$k)
+    end
+
+    identity_res = opnorm(Q'*Q-I) #Result should be zero
+    return identity_res
+end

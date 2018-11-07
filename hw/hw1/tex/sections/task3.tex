@@ -1,3 +1,25 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw1_report.tex
-test
+The performance of different versions of Gram-Schmidt orthogonalizations is investigated when combined with the Arnoldi method. We consider the matrix $A$ constructed by
+\begin{equation}
+\texttt{Random.seed!(0)}\medspace\texttt{A=matrixdepot("wathen",nn,nn)}
+\end{equation}
+and $m$ number of iterations in the Arnoldi method
+\subsection{(a)}
+\begin{table}[h]
+\centering
+
+\begin{tabular}{l | c | c|| c | c || c | c|| c | c}
+$m$& SGS time & SGS orth & MGS time & MGS orth & DGS time & DGS orth & TGS time & TGS orth \\ \hline 
+$5$ & 188 ms& $4.82\times 10^{-13}$& & & & & & \\
+$10$ & 496 ms& $2.15\times 10^{-12}$ & & & & & & \\
+$20$ & 1.10 s& $1.04\times 10^{-11}$& & & & & & \\
+$50$ & 4.05 s&$1.06\times 10^{-10}$ & & & & & & \\
+$100$ & &$4\times 10^{-11}$  & & & & & & \\
+\end{tabular}
+
+\end{table}
+
+\subsection{(b)}
+
+

@@ -34,7 +34,6 @@ function modifiedGS(Q,w,k)
     z = w
     h = zeros(1,k)
     for i = 1:k
-        println(Q);
         h[i] = Q[:,i]'*z
         z = z-h[i]*Q[:,i]
     end
