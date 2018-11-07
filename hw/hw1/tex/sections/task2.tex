@@ -1,0 +1,28 @@
+%!TeX spellcheck = en-US
+%!TEX root = ../hw1_report.tex
+
+\subsection{$(a)$}
+Insert figure
+\subsection{$(b)$}
+Insert figure
+\subsection{$(c)$}
+Insert figure
+
+The Rayleigh quotient only uses the symmetric part of $A$ in
+\begin{equation*}
+  r(\mathbf{x}) = \mathbf{x}^{H}A\mathbf{x}
+\end{equation*}
+assuming $\mathbf{x}$ is normalized.
+The matrix $A$ is no longer symmetric, i.e. $A\neq A^{H}$, but any square matrix can be decomposed into a symmetric part $A_{s}$ and a nonsymmetric part $A_{ns}$ by
+\begin{equation*}
+  A = \underbrace{\frac{1}{2}\left(A + A^{H}\right)}_{= A_{s}} + \underbrace{\frac{1}{2}\left(A - A^{H}\right)}_{=A_{ns}}.
+\end{equation*}
+Thus
+\begin{equation*}
+  r(\mathbf{x}) = \mathbf{x}^{H}A_{s}\mathbf{x} + \mathbf{x}^{H}A_{ns}\mathbf{x} = \mathbf{x}^{H}A_{s}\mathbf{x}
+\end{equation*}
+since
+\begin{equation*}
+ \mathbf{x}^{H}A_{ns}\mathbf{x}=\mathbf{x}^{H}A\mathbf{x} - \mathbf{x}^{H}A^{H}\mathbf{x} = 0.
+\end{equation*}
+For a nonsymmetric matrix all avaliable information is not used.
