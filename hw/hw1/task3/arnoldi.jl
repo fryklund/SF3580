@@ -34,7 +34,7 @@ function arnoldiGS(A,b,m::Number)
 
         # Orthogonalize w against columns of Q
        # replace this with a orthogonalization
-        h,beta,worth=singleGS(Q,w,k);
+        h,beta,worth=tripleGS(Q,w,k);
 
         # Put Gram-Schmidt coefficients into H
         H[1:(k+1),k]=[h[1:k];beta];
