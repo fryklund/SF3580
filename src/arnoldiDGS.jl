@@ -1,12 +1,6 @@
 using LinearAlgebra
 
-include("../../../src/gs_methods.jl")
-
-#using Pkg
-#Pkg.add("MatrixDepot")
-#Pkg.add("BenchmarkTools")
-using MatrixDepot, Random, BenchmarkTools
-
+include("gs_methods.jl")
 
 function arnoldiGS(A,b,m::Number)
 # % [Q,H]=arnoldi(A,b,m)
@@ -43,22 +37,4 @@ function arnoldiGS(A,b,m::Number)
         Q[:,k+1]=worth./beta;
     end
     return Q,H
-end
-
-
-function testArnoldi(m)
-     #size of matrix
-
-    Random.seed!(0)
-    nn  = 500 #determines size of matrix A
-    AA=matrixdepot("wathen",nn,nn)
-    b = randn(size(AA,1))
-    k =m
-
-    @btime begin
-        global Q, H = arnoldiGS($AA,$b,$k)
-    end
-
-    identity_res = opnorm(Q'*Q-I) #Result should be zero
-    return identity_res
 end
