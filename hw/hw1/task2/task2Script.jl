@@ -1,14 +1,14 @@
-using PyCall
-using PyPlot
+#using PyCall
+using Plots
 using LinearAlgebra
-include("../../src/power_iteration.jl")
-include("../../src/rayleigh_quotient.jl")
+include("../../../src/power_iteration.jl")
+include("../../../src/rayleigh_quotient.jl")
 
 A = [1 2 3; 2 2 2; 3 2 9];
 E_A = eigvals(A);
 x0 = ones(3);
 
-
+tol = 1e-10;
 #############################
 #########     a   ###########
 #############################
