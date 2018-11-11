@@ -2,7 +2,7 @@ using LinearAlgebra
 
 include("gs_methods.jl")
 
-function arnoldiGS(A::Matrix,b,m::Number)
+function arnoldi_DGS_complex(A::Matrix,b,m::Number)
 # % [Q,H]=arnoldi(A,b,m)
 # % A simple implementation of the Arnoldi method.
 # % The algorithm will return an Arnoldi "factorization":
@@ -18,9 +18,9 @@ function arnoldiGS(A::Matrix,b,m::Number)
 # %  should_be_zero2=norm(Q'*Q-eye(m+1))
 
     n=length(b)
-    Q=zeros(n,m+1)
+    Q=zeros(Complex,n,m+1)
     Q[:,1]=b./norm(b)
-    H = zeros(m+1,m)
+    H = zeros(Complex,m+1,m)
 
     for k=1:m
         w=A*Q[:,k]; # Matrix-vector product
