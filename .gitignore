@@ -1,5 +1,4 @@
 /local/*
-*.png
 *.aux
 *.fdb_latexmk
 *.fls

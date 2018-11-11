@@ -83,8 +83,7 @@ function arnupd(A,k,p,M,tol,v1)
 
     end
     display("Exceeded nof. outer iterations.");
-    V = ritz_vals;
-    return V,H,r
+    return V,H,r,ritz_vals
 end
 
 function shifts(H,p)
