@@ -37,7 +37,10 @@ for j = 1:k
 plot(1:n_restart,real(ritz_vals_vec[j,:]))
 end
 xticks([0;collect(0:10:n_restart)])
-savefig(string("task71_k10m20.png"))
+xlabel("Restarts")
+ylabel("Real part of eigenvalue approximation")
+#savefig(string("task7a1_k5m10.png"))
+savefig(string("task7a1_k10m20.png"))
 
 
 figure(2)
@@ -46,7 +49,10 @@ for j = 1:k
 plot(1:n_restart,imag(ritz_vals_vec[j,:]))
 end
 xticks([0;collect(0:10:n_restart)])
-savefig(string("task72_k10m20.png"))
+xlabel("Restarts")
+ylabel("Imaginary part of eigenvalue approximation")
+# savefig(string("task7a2_k5m10.png"))
+savefig(string("task7a2_k10m20.png"))
 
 figure(3)
 plot(real(B_eigvals),imag(B_eigvals),"bx")
@@ -57,4 +63,5 @@ ylabel("Im")
 legend(["Eigenvalues","Approximate eigenvalues"])
 title("Eigenvalues of B")
 
-savefig(string("task73_k10m20.png"))
+# savefig(string("task7a3_k5m10.png"))
+savefig(string("task7a3_k10m20.png"))

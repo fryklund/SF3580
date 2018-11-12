@@ -1,6 +1,7 @@
-#using PyCall
-using Plots
+using PyCall
+using PyPlot
 using LinearAlgebra
+
 include("../../../src/power_iteration.jl")
 include("../../../src/rayleigh_quotient.jl")
 
@@ -22,21 +23,16 @@ println(l_pi[end])
 if all_itr_pi
     n_pi = length(l_pi);
     l_max = E_A[argmax(abs.(E_A))];
-    error_pi = abs.(l_pi-l_max*ones(n_pi));
+    error_pi = abs.(l_pi-l_max*ones(n_pi)) +  ones(n_pi) * 10^(-14);
     println("Plotting")
     figure()
-    semilogy(error_pi + ones(n_pi) * 10^(-14),"r-o");
-    xlabel("Iteration number")
-    ylabel("Error maximal eigenvalue")
-    xticks(0:n_pi-1)
-    title("Power iteration")
-    savefig("task2a.png")
+    semilogy(1:n_pi,error_pi,"r-o");
 end
 end
 println(" ")
 #############################
 #     SETUP FOR REYLEIGH QUOTIENT
-mu0 = 0;
+#mu0 = 20;
 tol_rq = 1e-12;
 all_itr_rq = true; # Set true if power_iteration is to return a iterations for the
 B = [1 2 4; 2 2 2; 3 2 9];
@@ -55,17 +51,12 @@ println(l_rq[end])
 if all_itr_rq
     n_rq = length(l_rq);
     l_sim_rq = E_A[argmin(abs.(E_A-l_rq[end]*ones(3)))]
-    error_rq = abs.(l_rq-l_sim_rq * ones(n_rq));
+    error_rq = abs.(l_rq-l_sim_rq * ones(n_rq)) + ones(n_rq) * 10^(-14);
     println("Plotting")
-    figure()
-    semilogy(error_rq + ones(n_rq) * 10^(-14),"r-o");
-    xlabel("Iteration number")
-    ylabel("Error maximal eigenvalue")
-    title("Rayleigh quotient for largest eigenvalue")
-    xticks(0:n_rq-1)
-    savefig("task2b.png")
+    semilogy(1:n_rq,error_rq,"g-+");
 end
 end
+
 println(" ")
 #############################
 #########     c   ###########
@@ -80,15 +71,15 @@ println(l_rq[end])
 if all_itr_rq
     n_rq = length(l_rq);
     l_sim_rq = E_B[argmin(abs.(E_B-l_rq[end]*ones(3)))]
-    error_rq = abs.(l_rq-l_sim_rq * ones(n_rq));
+    error_rq = abs.(l_rq-l_sim_rq * ones(n_rq)) +  + ones(n_rq) * 10^(-14);
     println("Plotting")
-    figure()
-    semilogy(error_rq + ones(n_rq) * 10^(-14),"r-o");
+    semilogy(1:n_rq,error_rq,"c-*");
     xlabel("Iteration number")
     ylabel("Error maximal eigenvalue")
-    title("Rayleigh quotient for non-symmetric matrix")
-    xticks(0:n_rq-1)
-    savefig("task2c.png")
+    #title("Rayleigh quotient for non-symmetric matrix")
+    xticks(1:n_pi)
+    legend(["Power method","Rayleigh: A symmetric","Rayleigh: A  nonsymmetric"])
+    savefig("task2.png")
 end
 end
 println(" ")

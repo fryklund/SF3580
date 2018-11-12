@@ -11,9 +11,9 @@ l[1] = mu;
 while itr < itr_max
     v_old = v;
     B = (A - l[itr] * Id);
-    if cond(B,2) > 1e12
+    if cond(B,2) > 1e20
         println("Matrix singular after ",itr-1," iterations.")
-        l = l[1:itr];
+        l = l[2:itr];
         return v,l
     end
     w = B \ v;
@@ -22,7 +22,7 @@ while itr < itr_max
     l[itr] = v' * A * v;
     if abs(l[itr]-l[itr-1]) < tol && (norm(v-v_old)<tol||norm(v+v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within tolerance
         if allData
-            l = l[1:itr];
+            l = l[2:itr];
         else
             l = l[itr];
         end

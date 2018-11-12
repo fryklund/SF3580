@@ -24,7 +24,7 @@ A reference implementation of Algorithm 3.8 in  "Implicit application of polynom
    I1=sortperm(abs.(ee),rev=true);  ee=ee[I1]
    [ee ee2]
     """
-function arnupd(A,k,p,M,tol,v1)
+function myarnupd(A,k,p,M,tol,v1)
     # Step (1) initialize with a trivial Arnoldi factorization
 
     ritz_vals = zeros(Complex,k,M);
@@ -78,7 +78,7 @@ function arnupd(A,k,p,M,tol,v1)
 
 
             temp  = eigvals(H);
-            ritz_vals[:,m] = temp[1:5]
+            ritz_vals[:,m] = temp[1:k]
 
 
     end

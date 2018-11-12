@@ -22,10 +22,10 @@ function power_iteration(A,x,tol,allData = false)
             itr += 1;
             w = A * v;
             v = w / norm(w);
-            l[itr] = v' * A * v; # Wan to work around this.
+            l[itr] = v' * A * v;
             if (abs(l[itr]-l[itr-1]) < tol) && (norm(v-v_old)<tol) # If max_itr has been reached or if both eigenvector and eigenvalue are  within tolerance
                 if allData
-                    l = l[1:itr];
+                    l = l[2:itr];
                 else
                     l = l[itr];
                 end

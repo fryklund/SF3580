@@ -24,11 +24,8 @@ A reference implementation of Algorithm 3.8 in  "Implicit application of polynom
    I1=sortperm(abs.(ee),rev=true);  ee=ee[I1]
    [ee ee2]
     """
-function arnupd(A,k,p,M,tol,v1)
+function arnupd(A,k,p,tol,v1)
     # Step (1) initialize with a trivial Arnoldi factorization
-
-    ritz_vals = zeros(Complex,k,M);
-
     v1=v1/norm(v1);
     V=v1;
     H=v1'*A*v1;
@@ -39,16 +36,15 @@ function arnupd(A,k,p,M,tol,v1)
 
     norm(A*V-V*H-r*[zeros(1,k-1) 1])
 
-    for m=1:M   # Outer loop (i.e. restarts)
+    for m=1:100   # Outer loop (i.e. restarts)
         # Step (3).(1)
         print("iteration: ",m,"\n")
         normr=norm(r)
-        # if (norm(r)<tol)
-        #     restart_count=m-1
-        #     display("finished");
-        #     V = ritz_vals[:,1:restart_count];
-        #     return V,H,r
-        # end
+        if (norm(r)<tol)
+            restart_count=m-1
+            display("finished");
+            return V,H,r
+        end
 
         # Step (3).(2) Update the Arnoldi factorization
         H,V,r=arnoldi_sorensen(A,H[1:k,1:k],V[:,1:k],r,k,p);
@@ -76,14 +72,8 @@ function arnupd(A,k,p,M,tol,v1)
         σ=ekpp'*Q*ek;
         r=v*β+r*σ;
 
-
-            temp  = eigvals(H);
-            ritz_vals[:,m] = temp[1:5]
-
-
     end
     display("Exceeded nof. outer iterations.");
-    V = ritz_vals;
     return V,H,r
 end
 
