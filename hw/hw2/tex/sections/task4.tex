@@ -1,2 +1,50 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw1_report.tex
+The linear system of equations
+\begin{equation}
+\begin{bmatrix}
+2 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+1 & 2 & -1 & 0 & 0 & 0 & 0 & 0 \\
+0 & -1 & 2 & 1 & 0 & 0 & 0 & 0\\
+ 0 & 0 & 1 & 2 & 1 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 1 & 2 & 1 &0 & 0\\
+ 0 & 0 & 0 & 0 & 1 & 2 & 1 & 0\\
+ 0 & 0 & 0 & 0 & 0 & 1 & 2 & 1\\
+ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 2
+\end{bmatrix} x = 
+\begin{bmatrix}
+1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\0 \\0
+\end{bmatrix}
+\end{equation}
+is considered.
+\subsection{(a)}
+We determine the constants $\alpha$, $\beta$ and $\gamma$ such that for the iterates $x_0,\dots x_3$ of the conjugate gradient method we obtain span$(x_0,x_1,x_2,x_3)=$ span$(c_0,c_1,c_2,c_3)$, where 
+\begin{equation}
+C = [c_0,c_1,c_2,c_3] = \begin{bmatrix}
+1 & \alpha & 0 & \gamma \\
+1 & 0 & \beta & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 7 \\ 
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix}.
+\end{equation}
+For this purpose, we use Lemma 2.2.4 from the lecture notes, stating that
+\begin{equation}
+\text{span}(b,Ab,\dots A^{m-1}b) = \text{span}(x_0,x_1,\dots,x_m).
+\end{equation}
+Thus, we want to compute $\alpha$, $\beta$ and $\gamma$ such that 
+\begin{equation}\label{span}
+\text{span}(b,Ab,A^2b,A^3b) = \text{span}(c_0,c_1,c_2,c_3).
+\end{equation}
+We can directly conclude that span$(b)=$ span$(c_0)$. Next, we want to make sure that span$(b,Ab)=$ span$(c_0,c_1)$. By column reduction we thus find that $\alpha = 0$. Using that span$(b,Ab,A^2b)=$ span$(c_0,c_1,c_2)$, we can similarly find that $\beta = -1$ and finally, using \eqref{span}, and again reduce columns, we identify that $\gamma = 6$. 
+
+\subsection{(b)}
+See the implemented Julia code. We have replaced \texttt{???} with $\|Ax-b\|_{A^{-1}}$ . Comparing $\texttt{x}_\texttt{opt}$ and $\texttt{x}_\texttt{cg}$, we obtain a difference of $1.51\cdot 10^{-11}$. 
+
+\subsection{(c)}
+For GMRES, \texttt{???} is replaced by $\|Ax-b\|_2$. Now, comparing $\texttt{x}_\texttt{opt}$ with $\texttt{x}_\texttt{gmres}$, we obtain the difference $1.06\cdot 10^{-11}$. 
+
+
