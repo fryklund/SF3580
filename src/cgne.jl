@@ -1,6 +1,6 @@
 using LinearAlgebra
 
-function cgne(A,b,k)
+function cgne(A::SparseMatrixCSC{Complex{Float64},Int64},b,k)
     x = zeros(size(b));
     r = A'*b;
     p = r

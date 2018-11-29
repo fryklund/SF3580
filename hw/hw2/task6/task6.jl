@@ -16,7 +16,7 @@ bnorm = norm(b);
 
 
 
-for k = 1:100
+for k = 1:20
     println(k)
     global itr = k
     t_gmres = @belapsed gmres(B,b[:,1],itr)
@@ -24,9 +24,9 @@ for k = 1:100
     t_cg = @belapsed cgne(B,b[:,1],itr)
     x_cg = cgne(B,b[:,1],k)
 
-    figure(1)
-    semilogy(k,r_log[k]*bnorm,"r.")
-    semilogy(k,norm(x_ex[:,1].-x_cg),"b.")
+    #figure(1)
+    #semilogy(k,r_log[k]*bnorm,"r.")
+    #semilogy(k,norm(x_ex[:,1].-x_cg),"b.")
     figure(2)
     semilogy(t_gmres,r_log[k]*bnorm,"r.")
     semilogy(t_cg,norm(x_ex[:,1].-x_cg),"b.")
