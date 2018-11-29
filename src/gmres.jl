@@ -1,17 +1,17 @@
 using LinearAlgebra
 include("gs_methods.jl");
-function gmres(A::SparseMatrixCSC{Float64,Int64},b::Array{Float64,1},m::Int64)
+function gmres(A::SparseMatrixCSC{Complex{Float64},Int64},b::Array{Float64,1},m::Int64)
     n = length(b);
     normb = norm(b);
     q = b / normb;
-    z = zeros(n);
+    z = im*zeros(n);
     x = zeros(n);
     # Allocate space
     e1 = zeros(m+1,1);
     e1[1] = normb;
-    Q=zeros(n,m+1)
+    Q=im*zeros(n,m+1)
     Q[:,1] = b ./ normb;
-    H = zeros(m+1,m);
+    H = im*zeros(m+1,m);
     r_log = zeros(m);
     for k = 1:m
         # Matrix-vector product

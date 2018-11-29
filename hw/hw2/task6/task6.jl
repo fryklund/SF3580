@@ -1,5 +1,7 @@
-using LinearAlgebra, SparseArrays,BenchmarkTools,MAT,Arpack,PyPlot,PyCall
-include("../../../src/cg.jl")
+using LinearAlgebra, SparseArrays,BenchmarkTools,MAT,Arpack,PyPlot,PyCall,LaTeXStrings
+
+
+include("../../../src/cgne.jl")
 include("../../../src/gmres.jl")
 
 B=matread("Bwedge2.mat")["B"];
@@ -8,27 +10,48 @@ b=matread("Bwedge2.mat")["b"];
 F = eigen(Matrix(B))
 eig = F.values
 
-println(typeof(B))
-println(typeof(b[:,1]))
-x,r_log = gmres(B,b[:,1],2)
-#Problemet är här att gmres inte kan ta en komplexvärd matris!
+
+x_ex = B\b;
+bnorm = norm(b);
 
 
-figure()
+
 for k = 1:100
-    #x,r_log = gmres(B,b,k)
-    semilogy(k,r_log,'.')
-    x = cg(B,b[:,1],2)
+    println(k)
+    global itr = k
+    t_gmres = @belapsed gmres(B,b[:,1],itr)
+    x,r_log = gmres(B,b[:,1],k)
+    t_cg = @belapsed cgne(B,b[:,1],itr)
+    x_cg = cgne(B,b[:,1],k)
+
+    figure(1)
+    semilogy(k,r_log[k]*bnorm,"r.")
+    semilogy(k,norm(x_ex[:,1].-x_cg),"b.")
+    figure(2)
+    semilogy(t_gmres,r_log[k]*bnorm,"r.")
+    semilogy(t_cg,norm(x_ex[:,1].-x_cg),"b.")
+
 end
-xlabel("Real part of eigenvalues")
-ylabel("Imaginary part of eigenvalues")
-savefig("Eigens.png")
+
+figure(1)
+xlabel("Iteration")
+ylabel(L"$\|Ax-b\|_2$")
+legend(["gmres","cgne"])
+savefig("error_itr.png")
+close(1)
+
+figure(2)
+xlabel("CPU-time (seconds)")
+ylabel(L"$\|Ax-b\|_2$")
+legend(["gmres","cgne"])
+savefig("error_time.png")
+close(2)
 
 
-figure()
+
+figure(3)
 plot(real(eig),imag(eig),".")
 xlabel("Real part of eigenvalues")
 ylabel("Imaginary part of eigenvalues")
 savefig("Eigens.png")
-
-#x,r_log =
+close(3)
