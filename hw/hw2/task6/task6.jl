@@ -17,11 +17,15 @@ bnorm = norm(b);
 global c1 = 36.5
 global r1 = 20
 global c2 = eig[1]
+global a = maximum(abs.(c2.-eig))
+println("a")
+println(a)
 println(sqrt(r1*(r1+abs(c1-c2))/abs(c1*c2)))
 
-global c = 30;
-global r = 28
+global c = 36#30;
+global r = 20.1#28
 println(r/abs(c))
+
 
 
 
@@ -39,7 +43,7 @@ for k = 1:100
     semilogy(k,r_log[k]*bnorm,"r.")
     semilogy(k,norm(x_ex[:,1].-x_cg),"b.")
     #semilogy(k,vcond*(sqrt(r1*(r1+abs(c1-c2))/abs(c1*c2)))^(k-1),"k.")
-    semilogy(k,vcond*(r/abs(c))^(k-1),"k.")
+    semilogy(k,vcond*a*(r/abs(c))^(k-1),"k.")
     semilogy(k,2*((sqrt(co)-1)/(sqrt(co)+1))^k,"g.")
     #figure(2)
     #semilogy(t_gmres,r_log[k]*bnorm,"r.")
