@@ -8,7 +8,7 @@ include("../../../src/gmres.jl");
 
 # # α = 1
 m = 1000;
-n = 100;
+n = 6;
 α = 100;
 Random.seed!(0)
 A = sprand(m,m,0.5);

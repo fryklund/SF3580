@@ -1,6 +1,6 @@
 using LinearAlgebra
 include("gs_methods.jl");
-function gmres(A::SparseMatrixCSC{Complex{Float64},Int64},b::Array{Float64,1},m::Int64)
+function gmres(A::SparseMatrixCSC{Float64,Int64},b::Array{Float64,1},m::Int64)
     n = length(b);
     normb = norm(b);
     q = b / normb;

@@ -17,7 +17,7 @@ The linear system of equations
 \end{bmatrix}
 \end{equation}
 is considered.
-\subsection{(a)}
+\subsection*{(a)}
 We determine the constants $\alpha$, $\beta$ and $\gamma$ such that for the iterates $x_0,\dots x_3$ of the conjugate gradient method we obtain span$(x_0,x_1,x_2,x_3)=$ span$(c_0,c_1,c_2,c_3)$, where
 \begin{equation}
 C = [c_0,c_1,c_2,c_3] = \begin{bmatrix}
@@ -41,7 +41,7 @@ Thus, we want to compute $\alpha$, $\beta$ and $\gamma$ such that
 \end{equation}
 We can directly conclude that span$(b)=$ span$(c_0)$. Next, we want to make sure that span$(b,Ab)=$ span$(c_0,c_1)$. By column reduction we thus find that $\alpha = 0$. Using that span$(b,Ab,A^2b)=$ span$(c_0,c_1,c_2)$, we can similarly find that $\beta = -1$ and finally, using \eqref{span}, and again reduce columns, we identify that $\gamma = 6$.
 
-\subsection{(b)}
+\subsection*{(b)}
 See the implemented Julia code. We have replaced \texttt{???} with $\|Ax-b\|_{A^{-1}}$ . Comparing $\texttt{x}_\texttt{opt}$ and $\texttt{x}_\texttt{cg}$, we obtain a difference of $1.51\cdot 10^{-11}$.
 
 \subsection{(c)}
