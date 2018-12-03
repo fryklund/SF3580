@@ -22,8 +22,8 @@ println("a")
 println(a)
 println(sqrt(r1*(r1+abs(c1-c2))/abs(c1*c2)))
 
-global c = 36#30;
-global r = 20.1#28
+global c = 36.1#30;
+global r = 20.5#28
 println(r/abs(c))
 
 
@@ -56,7 +56,7 @@ figure(1)
 xlabel("Iteration")
 ylabel(L"$\|Ax-b\|_2$")
 legend(["gmres","cgne","gmres convergence bound","cgne convergence bound"])
-savefig("error_itr.png")
+savefig("error_itr2.png")
 close(1)
 
 #figure(2)
@@ -74,5 +74,5 @@ t = 0:0.01:2*pi
 plot(c.+r*cos.(t),r*sin.(t))
 xlabel("Real part of eigenvalues")
 ylabel("Imaginary part of eigenvalues")
-savefig("Eigens.png")
+savefig("Eigens2.png")
 close(3)
