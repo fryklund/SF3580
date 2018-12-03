@@ -1,7 +1,33 @@
 %!TeX spellcheck = en-US
-%!TEX root = ../hw1_report.tex
+%!TEX root = ../hw2_report.tex
 
 
-Given a real symmetric matrix $A$ with eigenvalues $10$, $10.5$ and 100 eigenvalues in the interval $[2,3]$, we prove a bound for then number of steps needed for CG to reduce the error measured in $\|Ax_n-b\|_{A^{-1}} = \|x_n-x_*\|$ by a factor $10^7$. We assume exact arithmetic and no breakdown. 
+Given a real symmetric matrix $A$ with eigenvalues $10$, $10.5$ and 100 eigenvalues in the interval $[2,3]$, we prove a bound for then number of steps needed for CG to reduce the error measured in $\|Ax_n-b\|_{A^{-1}} = \|x_n-x_*\|$ by a factor $10^7$. We assume exact arithmetic and no breakdown.\\
 
+\emph{Proof}:\\
+Let $\kappa = \lambda_{\max}/ \lambda_{\min}$. By Theorem $38.5.$ in T.B. we have
+\begin{equation}
+  \label{task5:est1}
+\frac{\|e_{n}\|}{\|e_{0}\|} = 2\left(\frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1}\right)^{n}.
+\end{equation}
+We seek $n$ such that the error has been reduced by a factor  $10^{7}$, i.e. $n$ such that \eqref{task5:est1} is about $1e-7$. For the matrix $A$ the largest lower bound for $\lambda_{\min}$ is $2$. The largest eigenvalue $\lambda_{\max} = 10.5$. We now solve the following problem for $n$,
 
+\begin{align*}
+&2\left(\frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1}\right)^{n}\leq 10^{-7}\\
+&\\
+\Leftrightarrow & n\leq\frac{\log{\left( 0.5\,10^{-7}}\right)}{\log{\left(\frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1}\right)}}
+&\\
+\Leftrightarrow & n\geq 17.967661670561174\\
+&\\
+\Leftrightarrow & n\geq 18.
+\end{align*}
+We confirm this numerically, $n = 17$ gives
+
+\begin{equation*}
+  2\left(\frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1}\right)^{18} \approx 2.473e-7
+\end{equation*}
+
+and $n = 18$ gives
+\begin{equation*}
+  2\left(\frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1}\right)^{18} \approx 9.702e-8.
+\end{equation*}

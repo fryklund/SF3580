@@ -12,7 +12,7 @@ function gmres(A::SparseMatrixCSC{Float64,Int64},b::Array{Float64,1},m::Int64)
     Q=zeros(n,m+1)
     Q[:,1] = b ./ normb;
     H = zeros(m+1,m);
-    r_log = zeros(m);
+    #r_log = zeros(m);
     for k = 1:m
         # Matrix-vector product
         #with last element
@@ -30,7 +30,8 @@ function gmres(A::SparseMatrixCSC{Float64,Int64},b::Array{Float64,1},m::Int64)
         # Approximate solution
         x = Q[:,1:k] * z[1:k];
         # Compute residual
-        r_log[k] = norm(A*x - b)/norm(b);
+        #r_log[k] = norm(A*x - b)/norm(b);
     end
-    return x,r_log;
+    #return x,r_log;
+    return x;
 end
