@@ -7,8 +7,8 @@ using LaTeXStrings
 include("../../../src/gmres.jl");
 
 # # α = 1
-m = 1000;
-n = 100;
+m = 2000;
+n = 2000;
 α = 1;
 Random.seed!(0)
 A = sprand(m,m,0.5);
