@@ -19,20 +19,23 @@ The iterates of CGN span a different Krylov subspace than gmres and it is mentio
 \subsection*{(b)}
 The result can be related to the convergence theory for CGN and GMRES. Investigating the eigenvalues of the matrix $B$, it is clear that all eigenvalues are contained in a disk, but for one isolated eigenvalue. However, trying to apply the convergence theory with two discs from the lecture notes is not possible in this case, as the obtained convergence factor is larger than 1. Therefore, one large disc is used and we apply Corollary 2.1.5, choosing $r = 28$ and $c =30 $. The resulting disc and bound is found in Figure \ref{task6b}.
 
+For CGN, we use the condition number bound for the error in iteration $m$,
+\begin{equation}
+\frac{\|e_m\|_2}{\|e_0\|_2}\leq 2\left(\frac{\sqrt{K(B^TB)}-1}{\sqrt{K(B^TB)}+1}\right)^m,
+\end{equation}
+taken from lecture notes.
+
 Note that for both methods, the bound for the convergence factor is heavily overestimated. For gmres, a better approach is to use the proof of wiki problem 2.24 (which Anna wrote) and use this estimate for an isolated eigenvalue instead. The wiki problem states that 
 \begin{equation}
-\min_{p\in P_m^0}\max_{i = 1,\dots,n}|p(\lambda_i)|\leq \alpha \min q\in_{m-1}^0\max_{i = 2,\dots,n|q(\lambda_i)|},
+\min_{p\in P_m^0}\max_{i = 1,\dots,n}|p(\lambda_i)|\leq \alpha \min_{q\in P_{m-1}^0}\max_{i = 2,\dots,n}|q(\lambda_i)|,
 \end{equation}
-for $\lambda\neq 1$ and 
+for $\lambda_1\neq 1$ and 
 \begin{equation}
 \alpha  = \max_{i = 2,\dots, n}\left(\frac{|\lambda_1-\lambda_i|}{|\lambda_i}\right).
 \end{equation}
 Combining this with a bound for all the other, clustered, eigenvalues (that are contained in a circle with radius 20.7 and center 36.1) gives the result in Figure \ref{better}, which is a much closer match to the true convergence properties of GMRES in this case. 
 
-For CGN, we use the condition number bound for the error in iteration $m$,
-\begin{equation}
-\frac{\|e_m\|_2}{\|e_0\|_2}\leq 2\left(\frac{\sqrt{K(B^TB)}-1}{\sqrt{K(B^TB)}+1}\right)^m
-\end{equation}
+
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}[t]{0.49\textwidth}
@@ -43,7 +46,7 @@ For CGN, we use the condition number bound for the error in iteration $m$,
 		\includegraphics[width=\textwidth]{error_bound.png}
 		\caption{Convergence for GMRES and CGN along with estimates of their convergence factors.}
 	\end{subfigure}
-	\caption{}
+	\caption{Task 6}
 	\label{task6b}
 \end{figure}
 
@@ -57,7 +60,7 @@ For CGN, we use the condition number bound for the error in iteration $m$,
 		\includegraphics[width=\textwidth]{error_itr2.png}
 		\caption{Convergence for GMRES and CGN along with estimates of their convergence factors, where the GMRES bound is improved.}
 	\end{subfigure}
-	\caption{}
+	\caption{Task 6, improved convergence estimate}
 	\label{better}
 \end{figure}
 
