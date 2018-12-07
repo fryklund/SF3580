@@ -26,9 +26,9 @@ bench_gmres_timings = run(bench_gmres)
 x_gmres = gmres(A,b,n);
 resnorm_gmres = norm(A*x_gmres - b);
 ################################################################
-# println("Backslash")
-# bench_bs = @benchmarkable A\b;
-# tune!(bench_bs);
-# bench_bs_timings = run(bench_bs);
-# x_bs = A\b;
-# resnorm_bs = norm(A*x_bs - b);
+println("Backslash")
+bench_bs = @benchmarkable A\b;
+tune!(bench_bs);
+bench_bs_timings = run(bench_bs);
+x_bs = A\b;
+resnorm_bs = norm(A*x_bs - b);
