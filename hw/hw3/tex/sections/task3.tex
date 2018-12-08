@@ -1,0 +1,22 @@
+%!TeX spellcheck = en-US
+%!TEX root = ../hw1_report.tex
+The performance of different versions of Gram-Schmidt orthogonalisations is investigated when combined with the Arnoldi method. We consider the matrix $A$ constructed by
+\begin{equation}
+\texttt{Random.seed!(0)};\medspace\texttt{A=matrixdepot("wathen",nn,nn)}
+\end{equation}
+where we choose $nn=500$ and use $m$ number of iterations in the Arnoldi method.  
+Results for CPU time and orthogonality of the basis in $Q$ is given in Table \ref{task3_tab}.
+\begin{table}[h]
+\centering
+\caption{Comparison for different types of Gram-Schmidt (GS) orthogonalisation in the Arnoldi method: SGS (single GS), MDS (modified GS), DGS (double GS), TGS (triple GS), where \emph{time} is the measured CPU time and \emph{orth} is the orthogonality of the basis in terms of $\|Q_m^TQ_m-I\|$.}
+\label{task3_tab}
+\begin{tabular}{l || c | c|| c | c || c | c|| c | c}
+$m$& SGS time & SGS orth & MGS time & MGS orth & DGS time & DGS orth & TGS time & TGS orth \\ \hline 
+$5$ & 188 ms& $4.82\cdot 10^{-13}$&241 ms & $3.28\cdot 10^{-15}$ &246 ms &$3.81\cdot 10^{-15}$ &298 ms & $3.84\cdot 10^{-15}$ \\
+$10$ & 496 ms& $2.15\cdot 10^{-12}$ &705 ms &$1.32\cdot 10^{-14}$ & 665 ms&$4.19\cdot 10^{-15}$ & 820 ms& $4.23\cdot 10^{-15}$ \\
+$20$ & 1.10 s& $1.04\cdot 10^{-11}$&2.03 s &$6.41\cdot 10^{-14}$ &1.682 s & $5.66\cdot 10^{-15}$ & 2.16 s & $5.72\cdot 10^{-15}$\\
+$50$ & 4.05 s&$1.06\cdot 10^{-10}$ &9.95 s &$6.04\cdot 10^{-13}$ &6.69 s & $6.18\cdot 10^{-15}$& 9.49 s & $6.38\cdot 10^{-15}$\\
+$100$ & 12.0 s&$4.77\cdot 10^{-10}$  & 37.8 s &$3.29\cdot 10^{-12}$ & 21.7 s&$7.82\cdot 10^{-15}$ & 31.2 s& $7.87\cdot 10^{-15}$ \\
+\end{tabular}
+\end{table}
+It can be concluded that double Gram-Schmidt performs the best in terms of orthogonalization error, while single Gram-Schmidt is the fastest among the algorithms. Triple Gram-Schmidt performs almost exactly as well as double Gram-Schmidt in terms of error, which is not surprising. It was stated during the lecture that the best result possible to achieve using multiple Gram-Schmidt is indeed obtained for double Gram-Schmidt. Note however that the CPU time required for triple Gram-Schmidt of course is considerably larger than for double Gram-Schmidt. The orthogonalization errors for the modified Gram-Schmidt is smaller than for single Gram-Schmidt but the algorithm is in this example seen to be worse than double Gram-Schmidt both in terms of CPU time and orthogonalization error. 
