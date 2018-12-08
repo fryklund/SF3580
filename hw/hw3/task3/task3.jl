@@ -5,7 +5,7 @@ include("../task2/task2.jl")
 
 N = [10 100 200 300 400]
 for k in N
-    A = alpha_example(1, k)
+    global A = alpha_example(1, k)
     th = @belapsed hessenberg_red(A)
     tn = @belapsed naive_hessenberg_red(A)
     print("naive")
