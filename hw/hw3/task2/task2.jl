@@ -10,13 +10,6 @@ function alpha_example(alpha, m = 10)
     if alpha <= 0
         error("alpha must be positive");
     end
-    # if (length(varargin)==0)
-    #     m=10;
-    # else
-    #     m=varargin{1};
-    # end
-
-    #randn('state',0); #Detta är matlabkod - hur göra i julia?
     Random.seed!(0)
     a=2;
     d=(a.^(0.0:(m-1)));
@@ -26,6 +19,7 @@ function alpha_example(alpha, m = 10)
     A=B\(diagm(0 => d)*B);
     return A
 end
+
 figure()
 k = 1:0.1:5
 for j in k
@@ -44,13 +38,11 @@ for j in k
         semilogx(N,-10*log(10)/(log(0.99-1/(5*N))),"b.-",label = "predicted number of iterations")
     else
         semilogx(N,itr,"r.")
-        semilogx(N,log(10^(-10))/(log(0.99-1/(5*N))),"b.-")
+        semilogx(N,(log(10^(-10))-log(5))/(log(0.99-1/(5*N))),"b.-")
     end
 
 end
 legend(loc=8)
 xlabel("alpha")
 ylabel("iterations")
-#legend("lower right",["number of iterations","predicted number of iterations"])
-
 savefig("alpha.png")
