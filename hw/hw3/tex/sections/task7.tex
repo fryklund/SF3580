@@ -76,6 +76,31 @@ We conclude that $G_{i+1} = [G_{i},A]_{i}$, that is $G_{1} = [G_{0},A]_{0} = B$ 
   G(t) = B + t[B,A]+\frac{t^{2}}{2!}[[B,A],A]+\frac{t^{2}}{2!}[[B,A],A,A]+\ldots
 \end{equation}
 
+\subsection*{(c)}
+Det här verkar misstänksamt simpelt...
+
+We identify the integrand as $G(t)$, that is
+
+\begin{equation}
+  P = \int\limits_{0}^{\tau}\,\exp(tA^{T})B\exp(tA)\,dt =\int\limits_{0}^{\tau}\,\exp(-tA)B\exp(tA)\,dt = \int\limits_{0}^{\tau}\,G(t)\,dt.
+\end{equation}
+Introduce
+\begin{equation}
+  P_{n} = \int\limits_{0}^{\tau}\,\sum\limits_{i=0}^{n}\frac{t^{i}}{i!}G_{i+1}\, dt=\,\sum\limits_{i=0}^{n}\int\limits_{0}^{\tau}\frac{t^{i}}{i!}G_{i+1}\, dt,
+\end{equation}
+Since the integrand is uniformly convergent, assuming $\tau$ finite, it holds that
+\begin{equation}
+  \lim\limits_{n\rightarrow \infty}P_{n}=  \lim\limits_{n\rightarrow \infty}\int\limits_{0}^{\tau}\, \sum\limits_{i=0}^{n}\frac{t^{i}}{i!}G_{i+1}\, dt = \int\limits_{0}^{\tau}\,\lim\limits_{n\rightarrow \infty} \sum\limits_{i=0}^{n}\frac{t^{i}}{i!}G_{i+1}\, dt = \int\limits_{0}^{\tau}\,G(t)\,dt = P
+\end{equation}
+where the limit was moved inside due to the dominated convergence theorem. Furthermore,
+\begin{equation}
+  \int\limits_{0}^{\tau}\frac{t^{i}}{i!}G_{i+1}\, dt = [G_{i},A]\frac{\tau^{i+1}}{(i+1)!},
+\end{equation}
+for every $i$. Thus
+\begin{equation}
+  P  =  \lim\limits_{n\rightarrow \infty} \sum\limits_{i=0}^{n} \int\limits_{0}^{\tau}\,\frac{t^{i}}{i!}G_{i+1}\, dt =  \sum\limits_{i=0}^{\infty}[G_{i},A]\frac{\tau^{i+1}}{(i+1)!}.
+\end{equation}
+
 
 \subsection*{(d)}
 Task: Let $C_k = [C_{k-1},A]$, with $C_0 = B$. We want to show that $\|C_k\|\leq 2^k\|A\|^k\|B\|$.
