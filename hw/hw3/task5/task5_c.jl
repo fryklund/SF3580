@@ -14,17 +14,6 @@ t_O = N * C
 
 
 
-title_string =  "\\alpha =  "
-# plot(1:length(r_log),log.(10,r_log))
-plot(N,t_sp,label=["1" "\\rho" "|| Ax - b||"])
-plot!(N,pval,label=["2" "\\rho" "|| Ax - b||"])
-plot!(N,t_n,title= title_string,label=["3" "as" "|| Ax - b||"],xticks = N,legend=:bottomright)
-xlabel!("#iterations")
-ylabel!("Absolute error")
-
-
-ys = Vector[rand(10), rand(20)]
 ys = Vector[t_n, t_sp, pval].*1000
-title= title_string
 plot(N,ys, color=[:blue :red :black], line=([:solid :dash :dot], 1), marker=([:xcross :circle :none], 5, 0.99),label=["Naive" "Schur-Pallett" "O(N)"],legend=:bottomright,title="Timings",xlabel="N",ylabel="CPU-time [ms]")
 savefig("Task5bc")

@@ -4,7 +4,7 @@ function compDiff_exp(ε)
     g = z -> exp(z)
     A = [π 1; 0  π+ε]
     λ1,λ2 = eigvals(A)
-    println("|λ1-λ2|", abs(λ1-λ2))
+    println("|λ1-λ2| = ", abs(λ1-λ2))
     Λ = Diagonal(exp.([λ1,λ2]))
     X = eigvecs(A)
     F = X * Λ * X^(-1)
@@ -14,5 +14,5 @@ function compDiff_exp(ε)
     f = p(A)
     # Equivalent expression
     # p = z -> g(λ1) .* I + g(λ1)/ε * (1 - g(ε)) * (π*I - z)
-    return norm(f-F)
+    return norm(f-F),norm(f-exp(A)),norm(F-exp(A))
 end

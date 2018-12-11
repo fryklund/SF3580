@@ -43,4 +43,11 @@ Given $g\coloneqq \text{exp}$ we have from $(a)$ and $(b)$ that
   &= \frac{\exp(\pi)}{\varepsilon}(\varepsilon I+(1 - \exp{(\varepsilon)})(\pi I -A))
 \end{align}
 \subsection*{(c)}
-It is known that the Jordan decomposition is unstable for non-symmetric matrices, as the eigenvalues may lie close to each other. For the given matrix $A$ this can be tuned artificially by setting $\varepsilon=|\lambda_{1}-\lambda_{2}|$. As we see in Figure (to be added, some layout to fix). However, the function \texttt{exp} in Julia is analogous to \texttt{expm} in Matlab, (we compared the resluts for $\varepsilon = 1e-1,\ldots,1e-10$). Using Matlabs \texttt{expm}$(A)$ as reference value, the error from the exact result in (b) also increases as $\varepsilon$. This is most likely due to cancelation.
+It is known that the Jordan decomposition is unstable for non-symmetric matrices, as the eigenvalues may lie close to each other. For the given matrix $A$ this can be tuned artificially by setting $\varepsilon=|\lambda_{1}-\lambda_{2}|$. As we see in Figure (to be added, some layout to fix). However, the function \texttt{exp} in Julia is analogous to \texttt{expm} in Matlab, (we compared the resluts for $\varepsilon = 1e-1,\ldots,1e-10$). Using Matlabs \texttt{expm}$(A)$ as reference value, the error from the exact result in (b) also increases as $\varepsilon$. This is most likely due to cancellation.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{Task6}
+\caption{Task $5$, (b) \& (c):  CPU--time in milliseconds, as a function of $N$.}
+\label{fig:task6}
+\end{figure}
