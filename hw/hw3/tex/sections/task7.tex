@@ -7,8 +7,13 @@ Let $\mu \in \mathbb{C}$ be an expansion point, then
 \begin{equation}
   f(tA) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(tA-\mu I)^{i}.
 \end{equation}
-If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Let $f(z) = \exp (z)$ and $g(z) = dz(t)/dt$, then
+If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Since $\exp$ is analytic everywhere, we can without loss of generality chose $\mu = 0$. We can without loss of generality chose $\mu = 0$. Then
 \begin{equation}
-  g(f(tA)) = g\left(\sum\limits_{i = 0}^{\infty} \frac{\exp(\mu)}{i!}(tA-\mu I)^{i}\right) = \sum\limits_{i = 0}^{\infty}\left( \frac{\exp(\mu)}{i!}g((tA-\mu I)^{i})\right) = A\sum\limits_{i = 1}^{\infty}\frac{\exp(\mu)}{(i-1)!}\left(tA-\mu I\right)^{i-1},
+  \frac{d}{dt}\exp(tA) = \frac{d}{dt}\left(\sum\limits_{i = 0}^{\infty} \frac{\exp(0)}{i!}(tA-0 I)^{i}\right) = \sum\limits_{i = 0}^{\infty} \frac{1}{i!}\frac{d}{dt}(t^{i}A^{i})  = \sum\limits_{i = 1}^{\infty}\frac{1}{(i-1)!}\left(tA\right)^{i-1}A = \sum\limits_{i = 0}^{\infty}\frac{1}{i!}\left(tA\right)^{i}A = \exp(tA)A,
 \end{equation}
-be rearranging the indices since $(tA-\mu I)^{0} = I$. The above holds if $g((tA)^{i}) = iA(tA)^{i-1}$. How to show this? 
+since $d/dt$ is the elementwise differential operator. Commutativity is shown by observing that
+\begin{equation}
+  i(tA)^{i-1}A = \frac{d}{dt}(t^{i}A^{i}) = \frac{d}{dt}(A^{i}t^{i}) = A (At)^{i-1}.
+\end{equation}
+The rest follows.
+\subsection*{(b)}
