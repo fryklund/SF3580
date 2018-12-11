@@ -17,7 +17,10 @@ The matrix $A$ is diagonalizable with the  eigendecomposition $A = QDQ^{-1}$, wh
 which in norm differs $4.28e-16$ from $Q\sin(D)Q^{-1}$.
 
 
-\lstinputlisting{"/Users/Fryklund/Documents/julia/SF3580/src/schur_parlett.jl"}
+%\lstinputlisting{"/Users/Fryklund/Documents/julia/SF3580/src/schur_parlett.jl"}
+
+%\lstinputlisting{"/../../../src/schur_parlett.jl"}
+
 \subsection*{(b) \& (c)}
 
 It is clear from Figure \ref{fig:task5bc} that the number of flops required for Schur--Parlett is not discernibly affected by $N$, at leat for $N \in {10,50,100,150,200,250,300}$. This is not suprsining, as often the most computationally demanding part of the Schur--Parlett method, in  is performing the Schur decomposition, which scales like $\mathcal{O}(n^{3})$. Once obtained, the function $f$ is only applied to the diagonal elements, which are scalars.

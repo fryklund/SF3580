@@ -1,19 +1,59 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw3_report.tex
 \subsection*{(a)}
-We start by observing that if $\lambda$ and $v$ are an eigenpair for $A$, then $t\lambda$ is an eigenvalue of $tA$ since $tAv = t\lambda v$.
+%We start by observing that if $\lambda$ and $v$ are an eigenpair for $A$, then $t\lambda$ is an eigenvalue of $tA$ since $tAv = t\lambda v$.
+%
+%Let $\mu \in \mathbb{C}$ be an expansion point, then
+%\begin{equation}
+%  f(tA) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(tA-\mu I)^{i}.
+%\end{equation}
+%If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Let $f(z) = \exp (z)$ and $g(z) = dz(t)/dt$, then
+%\begin{equation}
+%  g(f(tA)) = g\left(\sum\limits_{i = 0}^{\infty} \frac{\exp(\mu)}{i!}(tA-\mu I)^{i}\right) = \sum\limits_{i = 0}^{\infty}\left( \frac{\exp(\mu)}{i!}g((tA-\mu I)^{i})\right) = A\sum\limits_{i = 1}^{\infty}\frac{\exp(\mu)}{(i-1)!}\left(tA-\mu I\right)^{i-1},
+%\end{equation}
+%be rearranging the indices since $(tA-\mu I)^{0} = I$. The above holds if $g((tA)^{i}) = iA(tA)^{i-1}$. How to show this?
 
-Let $\mu \in \mathbb{C}$ be an expansion point, then
+%Anna's attempt:
+Consider the function $f(z,t) = e^{tz}$. We want to investigate the matrix valued function $f(A,t) = e^{Az}$. Let $\mu \in \mathbb{C}$ be an expansion point. Then,
 \begin{equation}
-  f(tA) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(tA-\mu I)^{i}.
+  f(A,t) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(A-\mu I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{t^ie^{tz}(\mu)}{i!}(A-\mu I)^{i}.
 \end{equation}
-If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Since $\exp$ is analytic everywhere, we can without loss of generality chose $\mu = 0$. We can without loss of generality chose $\mu = 0$. Then
+If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Now, compute the derivative of $f(A,t)$ with respect to time:
 \begin{equation}
-  \frac{d}{dt}\exp(tA) = \frac{d}{dt}\left(\sum\limits_{i = 0}^{\infty} \frac{\exp(0)}{i!}(tA-0 I)^{i}\right) = \sum\limits_{i = 0}^{\infty} \frac{1}{i!}\frac{d}{dt}(t^{i}A^{i})  = \sum\limits_{i = 1}^{\infty}\frac{1}{(i-1)!}\left(tA\right)^{i-1}A = \sum\limits_{i = 0}^{\infty}\frac{1}{i!}\left(tA\right)^{i}A = \exp(tA)A,
+\begin{aligned}
+\frac{\mathrm d}{\mathrm d t}e^{tA} & = \frac{\mathrm d}{\mathrm dt}\sum^{\infty}_{i = 0} \frac{t^ie^{t\mu}}{i!}(A-\mu I )^i = \\
+& = \sum^{\infty}_{i = 0} \frac{\mathrm d}{\mathrm dt}\left(\frac{t^ie^{t\mu}}{i!}(A-\mu I )^i\right) = \\
+& = \sum^{\infty}_{i = 0} \frac{\mathrm d}{\mathrm dt}\left(\frac{t^ie^{t\mu}}{i!}\right)(A-\mu I )^i  = \\
+&= \sum^{\infty}_{i = 0}  \left(\frac{it^{i-1}e^{t\mu}+t^i\mu e^{t\mu}}{i!}\right) (A-\mu I )^i.
+\end{aligned}
 \end{equation}
-since $d/dt$ is the elementwise differential operator. Commutativity is shown by observing that
+The last expression can be identified as $g(A)$, where $g(z) = ze^{tz}$ as  the expression
 \begin{equation}
-  i(tA)^{i-1}A = \frac{d}{dt}(t^{i}A^{i}) = \frac{d}{dt}(A^{i}t^{i}) = A (At)^{i-1}.
+\left(it^{i-1}e^{t\mu}+t^i\mu e^{t\mu}\right)
 \end{equation}
-The rest follows.
-\subsection*{(b)}
+is the $i$th derivative of the product $z\cdot e^{tz}$, which can be seen using the general Leibniz rule ($(f_1f_2)^{(n)} = \sum_{k = 0}^n\binom{n}{k}f_1^{(n-k)}(x)f_2^{(k)}(x)$). Thus, we can conclude that $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA}$. The matrix function $e^{tA}A$ has the same Taylor expansion expression as $Ae^{tA}$. Thus, $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA} = e^{tA} A$, which is what we wanted to show.
+
+
+
+
+%Let $f(z) = \exp (z)$ and $g(z) = dz(t)/dt$, then
+%\begin{equation}
+%  g(f(tA)) = g\left(\sum\limits_{i = 0}^{\infty} \frac{\exp(\mu)}{i!}(tA-\mu I)^{i}\right) = \sum\limits_{i = 0}^{\infty}\left( \frac{\exp(\mu)}{i!}g((tA-\mu I)^{i})\right) = A\sum\limits_{i = 1}^{\infty}\frac{\exp(\mu)}{(i-1)!}\left(tA-\mu I\right)^{i-1},
+%\end{equation}
+%be rearranging the indices since $(tA-\mu I)^{0} = I$. The above holds if $g((tA)^{i}) = iA(tA)^{i-1}$. How to show this?
+
+
+\subsection*{(d)}
+Task: Let $C_k = [C_{k-1},A]$, with $C_0 = B$. We want to show that $\|C_k\|\leq 2^k\|A\|^k\|B\|$.
+
+The proof is done by induction. For $k = 0$ we have that $\|C_0\| = \|B\|\leq 2^0\|A\|^0\|B\|$. Now, assume that $\|C_k\|\leq 2^k\|A\|^k\|B\|$. We want to show that
+$\|C_{k+1}\|\leq 2^{k+1}\|A\|^{k+1}\|B\|$:
+
+\begin{equation}
+\begin{aligned}
+\|C_{k+1}\| = \|C_kA-AC_k\| = \|C_{k}A+(-AC_k)\|\leq\|C_kA\|+\|-AC_k\| = \|C_kA+|-1|\|AC_k\|\leq\|C_k\|\|A\|+\|A\|\|C_k\| =\\
+= 2\|A\|\|C_k\| = 2^{k+1}\|A\|^{k+1}\|B\|,
+\end{aligned}
+\end{equation}
+which is what we wanted to show.
+\subsection*{(e)}
