@@ -42,8 +42,39 @@ is the $i$th derivative of the product $z\cdot e^{tz}$, which can be seen using 
 %\end{equation}
 %be rearranging the indices since $(tA-\mu I)^{0} = I$. The above holds if $g((tA)^{i}) = iA(tA)^{i-1}$. How to show this?
 \subsection*{(b)}
+Introduce
+\begin{equation}
+[B,A]_{n} =  [[B,A]_{n-1},A], n = 0,1,2,\ldots, \quad \text{ where }[B,A]_{1} = [B,A] = BA-AB \text{ and } [B,A]_{0} = B,
+\end{equation}
+which satisfies $[A+B,C]_{n} = [A,C]_{n} + [B,C]_{n}$. This is shown by induction: the initial case is $[A+B,C]_{1} = AC-CA + BC-CB = [A,C]_{1}+[B,C]_{1}$. Now assume $[A+B,C]_{n} = [A,C]_{n} + [B,C]_{n}$ holds, then
+\begin{align}
+[A+B,C]_{n+1} &=  [AC-CA + BC-CB,A]_{n} = [AC-CA,C]_{n} + [BC-CB,C]_{n} \\
+&= [[A,C],C]_{n} + [[B,C],C]_{n}=[A,C]_{n+1} + [B,C]_{n+1}.
+\end{align}
 
 
+Let $G(t) = \exp(-tA)B\exp(tA)$, which is analytic in $t$. Thus we may write
+\begin{equation}
+  \label{eq:task7bTaylor}
+G(t) = \sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} G^{(i)}(\mu)=\sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} G_{i},
+\end{equation}
+where $G_{0} = B$.
+By (a) we have that
+\begin{equation}
+  \frac{d}{dt}G(t) = G(t)A-AG(T) = [G(t),A].
+\end{equation}
+Setting this to be equal to the the derivative of \eqref{eq:task7bTaylor} with respect to $t$ gives
+\begin{equation}
+\sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} [G_{i},A] = \sum\limits_{i = 1}^{\infty}\frac{t^{i-1}}{(i-1)!} G_{i}.
+\end{equation}
+By shifting the indexing from $i = 1,2,\ldots $ to $i = 0,1,\ldots$ for the right hand side we get
+\begin{equation}
+\sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} [G_{i},A] = \sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} G_{i+1}.
+\end{equation}
+We conclude that $G_{i+1} = [G_{i},A]_{i}$, that is $G_{1} = [G_{0},A]_{0} = B$ and
+\begin{equation}
+  G(t) = B + t[B,A]+\frac{t^{2}}{2!}[[B,A],A]+\frac{t^{2}}{2!}[[B,A],A,A]+\ldots
+\end{equation}
 
 
 \subsection*{(d)}
