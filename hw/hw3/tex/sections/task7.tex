@@ -16,7 +16,7 @@
 %Anna's attempt:
 Consider the function $f(z,t) = e^{tz}$. We want to investigate the matrix valued function $f(A,t) = e^{Az}$. Let $\mu \in \mathbb{C}$ be an expansion point. Then,
 \begin{equation}
-  f(A,t) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(A-\mu I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{t^ie^{tz}(\mu)}{i!}(A-\mu I)^{i}.
+  f(A,t) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(A-\mu I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{t^ie^{t\mu}}{i!}(A-\mu I)^{i}.
 \end{equation}
 If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Now, compute the derivative of $f(A,t)$ with respect to time:
 \begin{equation}
@@ -60,3 +60,14 @@ $\|C_{k+1}\|\leq 2^{k+1}\|A\|^{k+1}\|B\|$:
 \end{equation}
 which is what we wanted to show.
 \subsection*{(e)}
+Suppose $\|A\|<\frac{1}{2}$ and $t\leq 1$. Let $G_N(t)$ be the truncation of $G(t)$, where
+\begin{equation}
+G(t) = \sum^{\infty}_{k = 0}\frac{t^k}{k!}C_k.
+\end{equation}
+Then,
+\begin{equation}
+\begin{aligned}
+\|G_N(t)-G(t)\|&= \|\sum^{\infty}_{k = N+1}\frac{t^k}{k!}C_k\|\leq\sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)\|C_k\|\leq\\
+&\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\|A\|^k\|B\|\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\left(\frac{1}{2}\right)^2\|B\|\leq\frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = N+1}t^k = \frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = 0}t^{k+(N+1)} =\\&=\frac{\|B\|t^{N-1}}{(N+1)!}t^{N+1}\cdot\frac{1}{1-t}.
+\end{aligned}
+\end{equation}
