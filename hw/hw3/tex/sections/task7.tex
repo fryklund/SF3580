@@ -1,17 +1,7 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw3_report.tex
 \subsection*{(a)}
-%We start by observing that if $\lambda$ and $v$ are an eigenpair for $A$, then $t\lambda$ is an eigenvalue of $tA$ since $tAv = t\lambda v$.
-%
-%Let $\mu \in \mathbb{C}$ be an expansion point, then
-%\begin{equation}
-%  f(tA) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(tA-\mu I)^{i}.
-%\end{equation}
-%If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Let $f(z) = \exp (z)$ and $g(z) = dz(t)/dt$, then
-%\begin{equation}
-%  g(f(tA)) = g\left(\sum\limits_{i = 0}^{\infty} \frac{\exp(\mu)}{i!}(tA-\mu I)^{i}\right) = \sum\limits_{i = 0}^{\infty}\left( \frac{\exp(\mu)}{i!}g((tA-\mu I)^{i})\right) = A\sum\limits_{i = 1}^{\infty}\frac{\exp(\mu)}{(i-1)!}\left(tA-\mu I\right)^{i-1},
-%\end{equation}
-%be rearranging the indices since $(tA-\mu I)^{0} = I$. The above holds if $g((tA)^{i}) = iA(tA)^{i-1}$. How to show this?
+
 
 %Anna's attempt:
 Consider the function $f(z,t) = e^{tz}$. We want to investigate the matrix valued function $f(A,t) = e^{Az}$. Let $\mu \in \mathbb{C}$ be an expansion point. Then,
@@ -34,7 +24,20 @@ The last expression can be identified as $g(A)$, where $g(z) = ze^{tz}$ as  the 
 is the $i$th derivative of the product $z\cdot e^{tz}$, which can be seen using the general Leibniz rule ($(f_1f_2)^{(n)} = \sum_{k = 0}^n\binom{n}{k}f_1^{(n-k)}(x)f_2^{(k)}(x)$). Thus, we can conclude that $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA}$. The matrix function $e^{tA}A$ has the same Taylor expansion expression as $Ae^{tA}$. Thus, $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA} = e^{tA} A$, which is what we wanted to show.
 
 
-
+\subsection*{(a): Alternative}
+Let $\mu \in \mathbb{C}$ be an expansion point, then
+\begin{equation}
+ f(tA) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(tA-\mu I)^{i}.
+\end{equation}
+For $f(z) = \exp(z)$ it is analytic and we can without loss of generality set $\mu = 0$. For now assume that $\frac{d}{dt}(tA)^{i} = iA(tA)^{i-1}$, then
+\begin{equation}
+ \frac{d}{dt}\exp(tA) = \frac{d}{dt}\sum\limits_{i = 0}^{\infty} \frac{\exp(0)}{i!}(tA-0 I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{1}{i!}\frac{d}{dt}(tA)^{i} = A\sum\limits_{i = 1}^{\infty}\frac{1}{(i-1)!}\left(tA\right)^{i-1} = A\sum\limits_{i = 0}^{\infty}\frac{1}{i!}\left(tA\right)^{i} = A\exp(tA),
+\end{equation}
+by shifting the indices $i \rightarrow i + 1$. We now motivate the claim above. By definition
+\begin{equation}
+  \frac{d}{dt}(tA)^{i} = \frac{((t+\varepsilon)A)^{i} - (tA)^{i}}{\varepsilon} = \frac{(t+\varepsilon)^{i} - t^{i}}{\varepsilon}A^{i} = \frac{d}{dt}(t^{i})A^{i} = iA(tA)^{i-1}.
+\end{equation}
+Since $it^{i-1}A^{i-1}A = iAt^{i-1}A^{i-1}$ we have $A\exp(tA) = \exp(tA)A$.
 
 %Let $f(z) = \exp (z)$ and $g(z) = dz(t)/dt$, then
 %\begin{equation}
