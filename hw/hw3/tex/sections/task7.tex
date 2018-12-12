@@ -6,7 +6,7 @@
 %Anna's attempt:
 Consider the function $f(z,t) = e^{tz}$. We want to investigate the matrix valued function $f(A,t) = e^{Az}$. Let $\mu \in \mathbb{C}$ be an expansion point. Then,
 \begin{equation}
-  f(A,t) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(A-\mu I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{t^ie^{t\mu}}{i!}(A-\mu I)^{i}.
+  f(A,t) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu,t)}{i!}(A-\mu I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{t^ie^{t\mu}}{i!}(A-\mu I)^{i}.
 \end{equation}
 If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Now, compute the derivative of $f(A,t)$ with respect to time:
 \begin{equation}
@@ -35,7 +35,7 @@ For $f(z) = \exp(z)$ it is analytic and we can without loss of generality set $\
 \end{equation}
 by shifting the indices $i \rightarrow i + 1$. We now motivate the claim above. By definition
 \begin{equation}
-  \frac{d}{dt}(tA)^{i} = \frac{((t+\varepsilon)A)^{i} - (tA)^{i}}{\varepsilon} = \frac{(t+\varepsilon)^{i} - t^{i}}{\varepsilon}A^{i} = \frac{d}{dt}(t^{i})A^{i} = iA(tA)^{i-1}.
+  \frac{d}{dt}(tA)^{i} = \lim_{\epsilon\to 0}\frac{((t+\varepsilon)A)^{i} - (tA)^{i}}{\varepsilon} = \lim_{\epsilon\to 0}\frac{(t+\varepsilon)^{i} - t^{i}}{\varepsilon}A^{i} = \frac{d}{dt}(t^{i})A^{i} = iA(tA)^{i-1}.
 \end{equation}
 Since $it^{i-1}A^{i-1}A = iAt^{i-1}A^{i-1}$ we have $A\exp(tA) = \exp(tA)A$.
 
