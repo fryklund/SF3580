@@ -122,14 +122,20 @@ Suppose $\|A\|<\frac{1}{2}$ and $t\leq 1$. Let $G_N(t)$ be the truncation of $G(
 \begin{equation}
 G(t) = \sum^{\infty}_{k = 0}\frac{t^k}{k!}C_k.
 \end{equation}
-Then,
+Then, if $t<1$,
 \begin{equation}
 \begin{aligned}
 \|G_N(t)-G(t)\|&= \|\sum^{\infty}_{k = N+1}\frac{t^k}{k!}C_k\|\leq\sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)\|C_k\|\leq\\
 &\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\|A\|^k\|B\|\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\left(\frac{1}{2}\right)^2\|B\|\leq\frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = N+1}t^k = \frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = 0}t^{k+(N+1)} =\\&=\frac{\|B\|}{(N+1)!}t^{N+1}\cdot\frac{1}{1-t},
 \end{aligned}
 \end{equation}
-where we have first used the result from (d) and then computed  the resulting geometric series. 
+where we have first used the result from (d) and then computed  the resulting geometric series. If $t = 1$, we have 
+\begin{equation}
+\begin{aligned}
+\|G_N(t)-G(t)\|&=\|\sum^{\infty}_{k = N+1}\frac{1}{k!}C_k\|\leq \|B\|\sum^{\infty}_{k = N+1}\frac{1}{k!}= \|B\|\left(e-\sum^N_{k = 0}\frac{1}{k!}\right) \leq \|B\|(e-\frac{1}{(N-1)!}),
+\end{aligned}
+\end{equation}
+where we have used the taylor expansion for $e$. 
 \subsection*{(f)}
 Using the results from (c), with 
 \begin{equation}
@@ -141,9 +147,14 @@ we denote by $P^N$ the computation of $P$ truncated at $N$ terms and obtain that
 \end{equation}
 Using the estimate in (e), we thus have that 
 \begin{equation}
-\|P_N-P\|\leq\frac{\|B\|\tau^{N+1}}{(N+1)!(1-\tau)}.
+\|P_N-P\|\leq\frac{\|B\|\tau^{N+1}}{(N+1)!(1-\tau)},
 \end{equation}
-Specifying a tolerance in a numerical algorithm for computing $P$, this last expression can be used to determine the number of iterations needed to compute $P$ given a specified tolerence. We can now design an algorithm for $P$ (in pseudocode) as: 
+if $\tau<1$ and 
+\begin{equation}
+\|P_N-P\|\leq\|B\|(e-\frac{1}{(N-1)!}),
+\end{equation}
+if $\tau = 1$.
+Specifying a tolerance in a numerical algorithm for computing $P$, these two last expressions can be used to determine the number of iterations needed to compute $P$ given a specified tolerence. We can now design an algorithm for $P$ (in pseudocode) as (here assuming $\tau<1$): 
 
 \begin{algorithm}[H]
  G = B;  - Sets initial element $G_0$.\\
@@ -160,3 +171,6 @@ Specifying a tolerance in a numerical algorithm for computing $P$, this last exp
  }
  \caption{Algorithm for computing the integral $P$.}
 \end{algorithm}
+
+\subsection*{(g)}
+We compare the algorithm in (f) to the naice numerical integration approach in Julia. We use $\tau = 1$ and the neumann matrix from the Matlab library
