@@ -2,29 +2,8 @@
 %!TEX root = ../hw3_report.tex
 \subsection*{(a)}
 
-
-%Anna's attempt:
-Consider the function $f(z,t) = e^{tz}$. We want to investigate the matrix valued function $f(A,t) = e^{Az}$. Let $\mu \in \mathbb{C}$ be an expansion point. Then,
-\begin{equation}
-  f(A,t) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu,t)}{i!}(A-\mu I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{t^ie^{t\mu}}{i!}(A-\mu I)^{i}.
-\end{equation}
-If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Now, compute the derivative of $f(A,t)$ with respect to time:
-\begin{equation}
-\begin{aligned}
-\frac{\mathrm d}{\mathrm d t}e^{tA} & = \frac{\mathrm d}{\mathrm dt}\sum^{\infty}_{i = 0} \frac{t^ie^{t\mu}}{i!}(A-\mu I )^i = \\
-& = \sum^{\infty}_{i = 0} \frac{\mathrm d}{\mathrm dt}\left(\frac{t^ie^{t\mu}}{i!}(A-\mu I )^i\right) = \\
-& = \sum^{\infty}_{i = 0} \frac{\mathrm d}{\mathrm dt}\left(\frac{t^ie^{t\mu}}{i!}\right)(A-\mu I )^i  = \\
-&= \sum^{\infty}_{i = 0}  \left(\frac{it^{i-1}e^{t\mu}+t^i\mu e^{t\mu}}{i!}\right) (A-\mu I )^i.
-\end{aligned}
-\end{equation}
-The last expression can be identified as $g(A)$, where $g(z) = ze^{tz}$ as  the expression
-\begin{equation}
-\left(it^{i-1}e^{t\mu}+t^i\mu e^{t\mu}\right)
-\end{equation}
-is the $i$th derivative of the product $z\cdot e^{tz}$, which can be seen using the general Leibniz rule ($(f_1f_2)^{(n)} = \sum_{k = 0}^n\binom{n}{k}f_1^{(n-k)}(x)f_2^{(k)}(x)$). Thus, we can conclude that $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA}$. The matrix function $e^{tA}A$ has the same Taylor expansion expression as $Ae^{tA}$. Thus, $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA} = e^{tA} A$, which is what we wanted to show.
-
-
-\subsection*{(a): Alternative}
+\emph{Comment: We have two alternative solutions in this excersise where we have used the definition of a matrix function in two different ways. Please comment if the second way to solve the problem also is valid, where we see the function $f$ as a function of two variables $f = f(z,t)$ and make a Taylor expansion in $z$ only.}
+\subsubsection*{Solution}
 Let $\mu \in \mathbb{C}$ be an expansion point, then
 \begin{equation}
  f(tA) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(tA-\mu I)^{i}.
@@ -44,6 +23,28 @@ Since $it^{i-1}A^{i-1}A = iAt^{i-1}A^{i-1}$ we have $A\exp(tA) = \exp(tA)A$.
 %  g(f(tA)) = g\left(\sum\limits_{i = 0}^{\infty} \frac{\exp(\mu)}{i!}(tA-\mu I)^{i}\right) = \sum\limits_{i = 0}^{\infty}\left( \frac{\exp(\mu)}{i!}g((tA-\mu I)^{i})\right) = A\sum\limits_{i = 1}^{\infty}\frac{\exp(\mu)}{(i-1)!}\left(tA-\mu I\right)^{i-1},
 %\end{equation}
 %be rearranging the indices since $(tA-\mu I)^{0} = I$. The above holds if $g((tA)^{i}) = iA(tA)^{i-1}$. How to show this?
+
+%Anna's attempt:
+\subsubsection*{Alternative solution}
+Consider the function $f(z,t) = e^{tz}$. We want to investigate the matrix valued function $f(A,t) = e^{Az}$. Let $\mu \in \mathbb{C}$ be an expansion point. Then,
+\begin{equation}
+  f(A,t) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu,t)}{i!}(A-\mu I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{t^ie^{t\mu}}{i!}(A-\mu I)^{i}.
+\end{equation}
+If $A\in\mathbb{C}^{n\times n}$, then $f:C^{n \times n}\rightarrow C^{n \times n}$. Now, compute the derivative of $f(A,t)$ with respect to time:
+\begin{equation}
+\begin{aligned}
+\frac{\mathrm d}{\mathrm d t}e^{tA} & = \frac{\mathrm d}{\mathrm dt}\sum^{\infty}_{i = 0} \frac{t^ie^{t\mu}}{i!}(A-\mu I )^i = \\
+& = \sum^{\infty}_{i = 0} \frac{\mathrm d}{\mathrm dt}\left(\frac{t^ie^{t\mu}}{i!}(A-\mu I )^i\right) = \\
+& = \sum^{\infty}_{i = 0} \frac{\mathrm d}{\mathrm dt}\left(\frac{t^ie^{t\mu}}{i!}\right)(A-\mu I )^i  = \\
+&= \sum^{\infty}_{i = 0}  \left(\frac{it^{i-1}e^{t\mu}+t^i\mu e^{t\mu}}{i!}\right) (A-\mu I )^i.
+\end{aligned}
+\end{equation}
+The last expression can be identified as $g(A)$, where $g(z) = ze^{tz}$ as  the expression
+\begin{equation}
+\left(it^{i-1}e^{t\mu}+t^i\mu e^{t\mu}\right)
+\end{equation}
+is the $i$th derivative of the product $z\cdot e^{tz}$, which can be seen using the general Leibniz rule ($(f_1f_2)^{(n)} = \sum_{k = 0}^n\binom{n}{k}f_1^{(n-k)}(x)f_2^{(k)}(x)$). Thus, we can conclude that $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA}$. The matrix function $e^{tA}A$ has the same Taylor expansion expression as $Ae^{tA}$. Thus, $\frac{\mathrm d }{\mathrm dt}e^{tA} = Ae^{tA} = e^{tA} A$, which is what we wanted to show.
+
 \subsection*{(b)}
 Introduce
 \begin{equation}
@@ -80,8 +81,6 @@ We conclude that $G_{i+1} = [G_{i},A]_{i}$, that is $G_{1} = [G_{0},A]_{0} = B$ 
 \end{equation}
 
 \subsection*{(c)}
-Det här verkar misstänksamt simpelt...
-
 We identify the integrand as $G(t)$, that is
 
 \begin{equation}
@@ -127,6 +126,37 @@ Then,
 \begin{equation}
 \begin{aligned}
 \|G_N(t)-G(t)\|&= \|\sum^{\infty}_{k = N+1}\frac{t^k}{k!}C_k\|\leq\sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)\|C_k\|\leq\\
-&\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\|A\|^k\|B\|\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\left(\frac{1}{2}\right)^2\|B\|\leq\frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = N+1}t^k = \frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = 0}t^{k+(N+1)} =\\&=\frac{\|B\|t^{N-1}}{(N+1)!}t^{N+1}\cdot\frac{1}{1-t}.
+&\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\|A\|^k\|B\|\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\left(\frac{1}{2}\right)^2\|B\|\leq\frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = N+1}t^k = \frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = 0}t^{k+(N+1)} =\\&=\frac{\|B\|}{(N+1)!}t^{N+1}\cdot\frac{1}{1-t},
 \end{aligned}
 \end{equation}
+where we have first used the result from (d) and then computed  the resulting geometric series. 
+\subsection*{(f)}
+Using the results from (c), with 
+\begin{equation}
+P = \sum^{\infty}_{i = 0}G_{i+1}\frac{\tau^{i+1}}{(i+1)!} = \sum^{\infty}_{i = 1}G_{i}\frac{\tau^{i}}{i!} = \sum^{\infty}_{i = 0}G_{i}\frac{\tau^{i}}{i!}-B,
+\end{equation}
+we denote by $P^N$ the computation of $P$ truncated at $N$ terms and obtain that
+\begin{equation}
+\|P-P^N\|= \|G_N(\tau)-G(\tau)\|. 
+\end{equation}
+Using the estimate in (e), we thus have that 
+\begin{equation}
+\|P_N-P\|\leq\frac{\|B\|\tau^{N+1}}{(N+1)!(1-\tau)}.
+\end{equation}
+Specifying a tolerance in a numerical algorithm for computing $P$, this last expression can be used to determine the number of iterations needed to compute $P$ given a specified tolerence. We can now design an algorithm for $P$ (in pseudocode) as: 
+
+\begin{algorithm}[H]
+ G = B;  - Sets initial element $G_0$.\\
+ P = 0; - Sets sum to zero\\
+ i = 1; - Number of iterations \\
+ err = 1;\\ 
+ t = 1;\\
+ \While{$\text{err}$ >$\text{tol}$}{
+  G = GA-AG;\\
+  t = t$\tau/i$;\\
+  P = P+Gt;\\
+  i = i+1;\\
+  err = $\frac{\|B\|\tau^{i+1}}{(i+1)!(1-\tau)}$
+ }
+ \caption{Algorithm for computing the integral $P$.}
+\end{algorithm}
