@@ -1,45 +1,43 @@
-using LinearAlgebra, MAT, SparseArrays, Random,QuadGK
-#using Pkg; Pkg.add("QuadGK")
+using LinearAlgebra, Random, SparseArrays, QuadGK
 
-#Comment: The inbuilt integration does not work yet!
-# function G(t,)
-#     A=matread("task7matrix.mat")["A"];
-#     B = sprand(size(A,1),size(A,2),0.05);
-#     A = Matrix(A)
-#     return exp(t*A')*B*exp(t*A)
-# end
-#
-# t = 1;
-# int = quadgk(G,0,t)
+# Construct system matrices. Turns out we can do this as in Matlab with MatrixDepot package
+A=matrixdepot("neumann",20);
+A=A-A';
+A=A./(2*norm(A,1));
+B=sprandn(20^2,20^2, 0.05);
 
-#Denna del fungerar inte heller än om t = 1. Funkar ev om t<1.
-#Har ibland svårt att läsa in matrisen. Varför?? Försöker specificera filens sökväg.
-function integrateP()
-    A = matread("task7matrix.mat")["A"]; #Reads the matrix A
-    B = sprand(size(A,1),size(A,2),0.05)
-    A = Matrix(A)
-    G = B
-    P = zeros(size(A,1),size(A,1))
-    i = 1
-    err = 1
-    t = 1
-    tol = 10^(-4)
-    tau = 0.5 #This is to be changed to one!
-    while abs(err)>tol
-        print(size(P))
-        print(i)
-        print("\n")
-        G = G*A-A*G
-        t = t*tau/i
-        P = P+G*t
-        i = i+1
-        err = opnorm(Matrix(B))*t*tau/(i*(1-tau))
-        #Obs, this line must be modified:
-        #err = opnorm(Matrix(B))*(exp(1)-(1/(factorial(i-1))))
-        print(err)
-    end
-    return P
+# Define the function G(t). exp acts as Matlabs expm. Neec Matrix() as A is sparse. This can be replaced with some other command that utilizes the sparsity.
+function G(t)
+    return exp(Matrix(t.*A'))*B*exp(Matrix(t.*A))
 end
 
+function integrateP(TOL = 1e-14)
+    # Estimate the number of required iterations
+    N = 1;
+    while(1/factorial(N+2) > TOL)
+            N = N+1;
+    end
+    println("Estimated #iterations: ", N)
+
+    # Algorithm in (f)
+    Gi = B
+    P = B
+    for i = 1:N
+        Gi = *(Gi,A)-*(A,Gi)
+        P += Gi/factorial(i+1);
+    end
+    err = 1/factorial(N+2)
+    print("Estimated error: ",err)
+    return P
+end
+timing  = time()
 P = integrateP()
-#print(P)
+timing = time() - timing
+println("\n")
+println("Time for algorithm in (f): ",timing)
+timing  = time()
+Pquadgk,Errorquadgk = quadgk(G,0,1);
+timing = time() - timing
+println("Time for quadgk: ",timing)
+
+println("Diff: ", norm(P-Pquadgk))

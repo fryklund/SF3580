@@ -1,20 +1,20 @@
 %!TeX spellcheck = en-US
-%!TEX root = ../hw2_report.tex
+%!TEX root = ../hw3_report.tex
 \subsection*{(a)}
-The QR-algorithm is implemented and applied to the given matrix, see Julia code and Figure  \ref{task2}. 
+The QR-algorithm is implemented and applied to the given matrix, see Julia code and Figure  \ref{task2}.
 
 \subsection*{(b) and (c)}
-The eigenvalues of the matrix A are (by construction) $[2^{[0:7]}, \lambda_9, 2^9]$, 
+The eigenvalues of the matrix A are (by construction) $[2^{[0:7]}, \lambda_9, 2^9]$,
 where
 
 \begin{equation}
-\lambda^{9} = 2^9\left(0.99-\frac{1}{5\alpha}\right).
+\lambda_{9} = 2^9\left(0.99-\frac{1}{5\alpha}\right).
 \end{equation}
-After $n$ iterations, the elements below the diagonal in the QR-iterates will be \emph{proportional} to $|\lambda_i/\lambda_j|^n$, where $i<j$. The large $\alpha$, the dominating eigenvalues are $\lambda_9$ and $\lambda_10$. Computing $|\lambda_i/\lambda_j|^n$, we obtain 
+After $n$ iterations, the elements below the diagonal in the QR-iterates will be \emph{proportional} to $|\lambda_i/\lambda_j|^n$, where $i<j$. For large $\alpha$, the dominating eigenvalues are $\lambda_9$ and $\lambda_{10}$. Computing $|\lambda_i/\lambda_j|^n$, for $i = 9$ and $j = 10$, we obtain
 \begin{equation}
 |\lambda_i/\lambda_j|^n = \left(0.99-\frac{1}{5\alpha}\right)^n.
 \end{equation}
-Taking this as a meassure of the error and setting a tolerence of $10^{-10}$, we obtain
+Taking this as a measure of the error and setting a tolerance of $10^{-10}$, we obtain
 \begin{equation}
 \begin{aligned}
 \left(0.99-\frac{1}{5\alpha}\right)^n\leq 10^{-10}\\

@@ -8,7 +8,7 @@ Let $\mu \in \mathbb{C}$ be an expansion point, then
 \begin{equation}
  f(tA) = \sum\limits_{i = 0}^{\infty} \frac{f^{(i)}(\mu)}{i!}(tA-\mu I)^{i}.
 \end{equation}
-For $f(z) = \exp(z)$ it is analytic and we can without loss of generality set $\mu = 0$. For now assume that $\frac{d}{dt}(tA)^{i} = iA(tA)^{i-1}$, then
+For $f(z) = \exp(z)$ the function is analytic and we can without loss of generality set $\mu = 0$. For now assume that $\frac{d}{dt}(tA)^{i} = iA(tA)^{i-1}$, then
 \begin{equation}
  \frac{d}{dt}\exp(tA) = \frac{d}{dt}\sum\limits_{i = 0}^{\infty} \frac{\exp(0)}{i!}(tA-0 I)^{i} = \sum\limits_{i = 0}^{\infty} \frac{1}{i!}\frac{d}{dt}(tA)^{i} = A\sum\limits_{i = 1}^{\infty}\frac{1}{(i-1)!}\left(tA\right)^{i-1} = A\sum\limits_{i = 0}^{\infty}\frac{1}{i!}\left(tA\right)^{i} = A\exp(tA),
 \end{equation}
@@ -16,7 +16,7 @@ by shifting the indices $i \rightarrow i + 1$. We now motivate the claim above. 
 \begin{equation}
   \frac{d}{dt}(tA)^{i} = \lim_{\epsilon\to 0}\frac{((t+\varepsilon)A)^{i} - (tA)^{i}}{\varepsilon} = \lim_{\epsilon\to 0}\frac{(t+\varepsilon)^{i} - t^{i}}{\varepsilon}A^{i} = \frac{d}{dt}(t^{i})A^{i} = iA(tA)^{i-1}.
 \end{equation}
-Since $it^{i-1}A^{i-1}A = iAt^{i-1}A^{i-1}$ we have $A\exp(tA) = \exp(tA)A$.
+Since $it^{i-1}A^{i-1}A = iAt^{i-1}A^{i-1}$ we have $A\exp(tA) = \exp(tA)A=\frac{d}{dt}\exp(tA)$.
 
 %Let $f(z) = \exp (z)$ and $g(z) = dz(t)/dt$, then
 %\begin{equation}
@@ -48,9 +48,9 @@ is the $i$th derivative of the product $z\cdot e^{tz}$, which can be seen using 
 \subsection*{(b)}
 Introduce
 \begin{equation}
-[B,A]_{n} =  [[B,A]_{n-1},A], n = 0,1,2,\ldots, \quad \text{ where }[B,A]_{1} = [B,A] = BA-AB \text{ and } [B,A]_{0} = B,
+[B,A]_{n} =  [[B,A]_{n-1},A], n = 0,1,2,\ldots, \quad \text{ where }[B,A]_{1} = [B,A] = BA-AB \text{ and } [B,A]_{0} = B.
 \end{equation}
-which satisfies $[A+B,C]_{n} = [A,C]_{n} + [B,C]_{n}$. This is shown by induction: the initial case is $[A+B,C]_{1} = AC-CA + BC-CB = [A,C]_{1}+[B,C]_{1}$. Now assume $[A+B,C]_{n} = [A,C]_{n} + [B,C]_{n}$ holds, then
+We will later in the proof use that $[A+B,C]_{n} = [A,C]_{n} + [B,C]_{n}$, which is shown by induction: the initial case is $[A+B,C]_{1} = AC-CA + BC-CB = [A,C]_{1}+[B,C]_{1}$. Now assume $[A+B,C]_{n} = [A,C]_{n} + [B,C]_{n}$ holds, then
 \begin{align}
 [A+B,C]_{n+1} &=  [AC-CA + BC-CB,A]_{n} = [AC-CA,C]_{n} + [BC-CB,C]_{n} \\
 &= [[A,C],C]_{n} + [[B,C],C]_{n}=[A,C]_{n+1} + [B,C]_{n+1}.
@@ -63,11 +63,14 @@ Let $G(t) = \exp(-tA)B\exp(tA)$, which is analytic in $t$. Thus we may write
 G(t) = \sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} G^{(i)}(\mu)=\sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} G_{i},
 \end{equation}
 where $G_{0} = B$.
-By (a) we have that
+By (a) and that $[A+B,C]_{n} = [A,C]_{n} + [B,C]_{n}$ we have that
 \begin{equation}
-  \frac{d}{dt}G(t) = G(t)A-AG(T) = [G(t),A].
+  \frac{d}{dt}G(t) = G(t)A-AG(T) = [G(t),A]=\left[\sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} G_{i},A\right] = \sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} [G_{i},A]
 \end{equation}
-Setting this to be equal to the the derivative of \eqref{eq:task7bTaylor} with respect to $t$ gives
+
+
+
+ Setting this to be equal to the the derivative of \eqref{eq:task7bTaylor} with respect to $t$ gives
 \begin{equation}
 \sum\limits_{i = 0}^{\infty}\frac{t^{i}}{i!} [G_{i},A] = \sum\limits_{i = 1}^{\infty}\frac{t^{i-1}}{(i-1)!} G_{i}.
 \end{equation}
@@ -122,55 +125,48 @@ Suppose $\|A\|<\frac{1}{2}$ and $t\leq 1$. Let $G_N(t)$ be the truncation of $G(
 \begin{equation}
 G(t) = \sum^{\infty}_{k = 0}\frac{t^k}{k!}C_k.
 \end{equation}
-Then, if $t<1$,
+Then,
 \begin{equation}
 \begin{aligned}
 \|G_N(t)-G(t)\|&= \|\sum^{\infty}_{k = N+1}\frac{t^k}{k!}C_k\|\leq\sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)\|C_k\|\leq\\
-&\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\|A\|^k\|B\|\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\left(\frac{1}{2}\right)^2\|B\|\leq\frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = N+1}t^k = \frac{\|B\|}{(N+1)!}\sum^{\infty}_{k = 0}t^{k+(N+1)} =\\&=\frac{\|B\|}{(N+1)!}t^{N+1}\cdot\frac{1}{1-t},
+&\leq \sum^{\infty}_{k = N+1}\left(\frac{t^k}{k!}\right)2^k\|A\|^k\|B\|\leq \|B\|\sum^{\infty}_{k = N+1}\frac{t^k}{k!} = \|B\|\left(\sum^{\infty}_{k = 0}\frac{t^k}{k!}-\sum^{N}_{k = 0}\frac{t^k}{k!}\right) =  \|B\|\left(e^{t}-\sum^{N}_{k = 0}\frac{t^k}{k!}\right).
 \end{aligned}
 \end{equation}
-where we have first used the result from (d) and then computed  the resulting geometric series. If $t = 1$, we have 
+where we have first used the result from (d). Passing the limit $N\rightarrow \infty$ we see that $\|G_N(t)-G(t)\| \rightarrow 0$. That is for all $\|A\|\leq 1$ and $t\leq 1$. This implies that
+for some $N$ the difference $\|G_N(t)-G(t)\|$ is equal to the $N+1$:th term in the expansion, evaluated in some uknown point $T\in [0,1]$. In other words, the error bound is
 \begin{equation}
-\begin{aligned}
-\|G_N(t)-G(t)\|&=\|\sum^{\infty}_{k = N+1}\frac{1}{k!}C_k\|\leq \|B\|\sum^{\infty}_{k = N+1}\frac{1}{k!}= \|B\|\left(e-\sum^N_{k = 0}\frac{1}{k!}\right) \leq \|B\|(e-\frac{1}{(N-1)!}),
-\end{aligned}
+  \|G_N(t)-G(t)\| = \|B\|\frac{t^{N+1}}{(N+1)!}e^{T}.
 \end{equation}
-where we have used the taylor expansion for $e$. 
+
 \subsection*{(f)}
-Using the results from (c), with 
+Using the results from (c), with
 \begin{equation}
 P = \sum^{\infty}_{i = 0}G_{i+1}\frac{\tau^{i+1}}{(i+1)!} = \sum^{\infty}_{i = 1}G_{i}\frac{\tau^{i}}{i!} = \sum^{\infty}_{i = 0}G_{i}\frac{\tau^{i}}{i!}-B,
 \end{equation}
 we denote by $P^N$ the computation of $P$ truncated at $N$ terms and obtain that
 \begin{equation}
-\|P-P^N\|= \|G_N(\tau)-G(\tau)\|. 
+\|P-P^N\|= \|G_N(\tau)-G(\tau)\|.
 \end{equation}
-Using the estimate in (e), we thus have that 
+Using the estimate in (e), we thus have that
 \begin{equation}
-\|P_N-P\|\leq\frac{\|B\|\tau^{N+1}}{(N+1)!(1-\tau)},
+\|P_N-P\|\leq\int\limits_{0}^{\tau}\|B\|\frac{t^{N+1}}{(N+1)!}e^{T} =  \|B\|\frac{\tau^{N+2}}{(N+2)!}e^{T},\quad T\in [0,\tau].
 \end{equation}
-if $\tau<1$ and 
-\begin{equation}
-\|P_N-P\|\leq\|B\|(e-\frac{1}{(N-1)!}),
-\end{equation}
-if $\tau = 1$.
-Specifying a tolerance in a numerical algorithm for computing $P$, these two last expressions can be used to determine the number of iterations needed to compute $P$ given a specified tolerence. We can now design an algorithm for $P$ (in pseudocode) as (here assuming $\tau<1$): 
+Thus we may a priori estimate the number of iterations that are required by estimating the error as $1/(N+2)!$.
+now design an algorithm for $P$ (in pseudocode) as:
 
 \begin{algorithm}[H]
  G = B;  - Sets initial element $G_0$.\\
- P = 0; - Sets sum to zero\\
+ P = G; - Sets initial element, as we start at i = 1\\
  i = 1; - Number of iterations \\
- err = 1;\\ 
+ err = 1;\\
  t = 1;\\
- \While{$\text{err}$ >$\text{tol}$}{
+ \For{i = 1:N}{
   G = GA-AG;\\
   t = t$\tau/i$;\\
   P = P+Gt;\\
-  i = i+1;\\
-  err = $\frac{\|B\|\tau^{i+1}}{(i+1)!(1-\tau)}$
  }
  \caption{Algorithm for computing the integral $P$.}
 \end{algorithm}
 
 \subsection*{(g)}
-We compare the algorithm in (f) to the naice numerical integration approach in Julia. We use $\tau = 1$ and the neumann matrix from the Matlab library
+We compare the algorithm in (f) to the naice numerical integration approach in Julia. We use $\tau = 1$ and the Neumann matrix from the library of the package  MatrixDepot. See the attached code. We set an tolerance of $1e-14$. For the algorithm devised in (f) the CPU time in secons, including estimating $N$, is about $0.03$ seconds and the estimated error is $2.8e-15$. As a substitute for Matlabs integral we used \texttt{quadgk} from the package sharing its name. The corresponding time is $1.21$ seconds, which is about $33$ times slower. The estimated error, which \texttt{quadgk} gives as an output, is $1.0e-14$. The difference between the two results are about $1e-14$.

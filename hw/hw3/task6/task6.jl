@@ -17,5 +17,5 @@ end
 
 y = [log.(10,errV[:,1]) log.(10,errV[:,2]) log.(10,errV[:,3])]
 title_string = "asd"
-plot(collect(-10:0.1:-0.1),y, label=["||f(A)-F||" "|||f(A)- expm(A)|" "|||F- expm(A)|"],legend=:bottomright,xlabel="epsilon",ylabel="norm")
+plot(collect(-0.1:-0.1:-10),y, label=["||p(A)-F||" "|||p(A)- exp(A)|" "|||F- exp(A)|"],legend=:topright,xlabel="log10(epsilon)",ylabel="log10(norm)")
 savefig("Task6.png")

@@ -1,10 +1,10 @@
 %!TeX spellcheck = en-US
-%!TEX root = ../hw1_report.tex
+%!TEX root = ../hw3_report.tex
 
 \subsection*{(a)}
-Given a vector $x\in \mathbb R^n$ with $y\neq 0$ and $x\neq 0$, we derive a formula for a Householder reflector (represented by a normal direction $u\in\mathbb R^n$) such that $Px = \alpha y$ for some value $\alpha$. 
+Given two nonzero vectors $x,y\in \mathbb R^n$, we derive a formula for a Householder reflector (represented by a normal direction $u\in\mathbb R^n$) such that $Px = \alpha y$ for some value $\alpha$.
 
-Let $z = x-\frac{\|x\|}{\|y\|}y$ and $u = \frac{z}{\|z\|}$. Then, the matrix $P = I-2uu^T$ is a Householder reflector since $u$ is normalized. Further, $Px$ can be computed as 
+Let $z = x-\frac{\|x\|}{\|y\|}y$ and $u = \frac{z}{\|z\|}$. Then, the matrix $P = I-2uu^T$ is a Householder reflector since $u$ is normalized. Further, $Px$ can be computed as
 \begin{equation}
 Px = (I-2uu^T)x.
 \end{equation}
@@ -12,7 +12,7 @@ Consider the product
 \begin{equation}
 uu^Tx = \frac{zz^Tx}{\|z\|\|z\|} = \frac{z(z^Tx)}{z^Tz},
 \end{equation}
-where 
+where
 \begin{equation}
 z^Tx = \left(x-\frac{\|x\|}{\|y\|}y\right)^Tx = \|x\|^2-\frac{\|x\|}{\|y\|}y^Tx
 \end{equation}
@@ -20,11 +20,11 @@ and
 \begin{equation}
 z^Tz = \left(x-\frac{\|x\|}{\|y\|}y\right)^T\left(x-\frac{\|x\|}{\|y\|}y\right)=\|x\|^2-2x^Ty\frac{\|x\|}{\|y\|}+\|x\|^2 = 2\left(\|x\|^2-x^Ty\frac{\|x\|}{\|y\|}\right).
 \end{equation}
-Now, we easily identify that 
+Now, we easily identify that
 \begin{equation}
 Px = x-z =\frac{\|x\|}{\|y\|}y = \alpha y,
 \end{equation}
-which is what we wanted to show. 
+which is what we wanted to show.
 \subsection*{(b) and (c)}
 Both a naive and an improved Hessenberg reduction algorithm is implemented in Julia. We compare the algorithms by computing a Hessenberg reduction of a given matrix of size $m\times m$. The result is found in Table \ref{task3}.
 \begin{table}[h!]
@@ -44,7 +44,7 @@ Both a naive and an improved Hessenberg reduction algorithm is implemented in Ju
 \subsection*{(d)}
 Let $\hat{H}$ be the result of one step of the shifted QR-method with shift $\sigma$ for the matrix
 \begin{equation}
-A = 
+A =
 \begin{bmatrix}
 3 & 2\\ \epsilon & 1
 \end{bmatrix}.
@@ -71,8 +71,4 @@ Results are found in Table \ref{task3d}.
 		$10^{-10}$ & $3.3\cdot 10^{-12}$ & $ 5.0\cdot 10^{-23}$\\  \hline
 	\end{tabular}
 \end{table}
-The values in the table corresponds to the values on the off- diagonal which can be seen as the error while computing the eigenvalues of the matrix $A$. The error decreases much faster with $\epsilon$ when the shifted QR-method is used than when the unshifted QR-method is used (corresponding to $\sigma = 0$). 
-
-
-		
-		
+The values in the table corresponds to the values on the off- diagonal which can be seen as the error while computing the eigenvalues of the matrix $A$. The error decreases much faster with $\epsilon$ when the shifted QR-method is used than when the unshifted QR-method is used (corresponding to $\sigma = 0$).
