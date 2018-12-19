@@ -1,4 +1,32 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw3_report.tex
-
+We show that $\text{vec}(\mathbf{uv}^T) = \mathbf{v}\otimes\mathbf{ u}$, where $\mathbf u$ and $\mathbf v$ are two vectors of length $n$. Starting with the left hand side, we have
+\begin{equation}
+uv^T = 
+\begin{bmatrix}
+u_1 \\ u_2 \\ \vdots \\ u_n
+\end{bmatrix}
+\begin{bmatrix}
+v_1, & v_2, & \dots, & v_n
+\end{bmatrix}
+ = \begin{bmatrix}
+ u_1v_1, & u_1v_2, &\dots, & u_1v_n \\
+ u_2v_1 & u_2v_2, &\dots, & u_2v_n\\
+ \vdots & \vdots & \ddots & \vdots \\
+ u_nv_1 & u_nv_2 & \dots & u_nv_n
+ \end{bmatrix}.
+\end{equation}
+Thus, 
+\begin{equation}\label{left1}
+\text{vec}(\mathbf{uv}^T) = \begin{bmatrix}
+u_1v_1,\dots,u_nv_1,u_1v_2,\dots,u_nv_2,\dots,u_1v_n,\dots,u_nv_n
+\end{bmatrix}.
+\end{equation}
+The right hand side expression can be written as
+\begin{equation}
+\mathbf v\otimes \mathbf u = \begin{bmatrix}
+v_1\mathbf u \\ v_2\mathbf u\\ \vdots\\ v_n\mathbf u
+\end{bmatrix},
+\end{equation}
+which is the same as the expression for the left hand side in \eqref{left1}.
 

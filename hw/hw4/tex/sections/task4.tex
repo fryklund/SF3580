@@ -1,2 +1,14 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw1_report.tex
+We consider
+\begin{equation}
+A = \begin{bmatrix}
+0 & a \\ 1 & 0,
+\end{bmatrix}\medspace
+W = \begin{bmatrix}
+1 & 2 \\ 2 & 1
+\end{bmatrix}
+\end{equation} 
+and determine for which values of $a$ that the Lyapunov equation has a unique solution. 
+
+The answer is given using theorem 4.1.1 from the lecture notes. The eigenvalues of the real matrix $A$ is $\lambda = \pm\sqrt{a}$. The theorem states that the Lyapunov equation has a unique solution if and only if $\lambda_1\neq-\lambda_2$. The only possibility for this to hold is if $a=0$. 
