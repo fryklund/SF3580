@@ -1,0 +1,40 @@
+close all; clear;
+
+g = @(x,y,alpha) alpha*sqrt((x-0.5).^2+(y-0.5).^2);
+f = @(x,y) abs(x-y);
+
+%a)
+alpha = 0;
+m = 3;
+
+%%
+%SOLVE system:
+[A,b,X,Y] = construct_poisson_matrices(f,g,m,alpha);
+x = A\b;
+figure(1)
+Z = reshape(x,m,m);
+surf(X,Y,Z);
+xlabel('x','interpreter','latex');
+ylabel('y','interpreter','latex');
+
+alpha = 0; 
+[A,b,X,Y] = construct_poisson_matrices(f,g,m,alpha);
+Q = reshape(b,m,m);
+e = ones(m,1);
+T = spdiags([e -2*e e], -1:1, m, m);
+Z2 = lyap(T,-Q);
+
+figure(2)
+surf(X,Y,Z2);
+xlabel('x','interpreter','latex');
+ylabel('y','interpreter','latex');
+
+norm(Z-Z2)
+
+
+
+
+
+
+
+
