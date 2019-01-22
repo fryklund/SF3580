@@ -4,8 +4,8 @@ function gmres(A::SparseMatrixCSC{Float64,Int64},b::Array{Float64,1},m::Int64)
     n = length(b);
     normb = norm(b);
     q = b / normb;
-    z = im*zeros(n);
-    x = zeros(n);
+    # z = im*zeros(n);
+    # x = zeros(n);
     # Allocate space
     e1 = zeros(m+1,1);
     e1[1] = normb;
@@ -24,11 +24,11 @@ function gmres(A::SparseMatrixCSC{Float64,Int64},b::Array{Float64,1},m::Int64)
         # Normalize
         Q[:,k+1]=worth./beta;
         # Solve least squares problem
-        z[1:k] =  H[1:(k+1),1:k] \ e1[1:(k+1)];
+        z =  H[1:(k+1),1:k] \ e1[1:(k+1)];
 
 
         # Approximate solution
-        x = Q[:,1:k] * z[1:k];
+        x = Q[:,1:k] * z;
         # Compute residual
         r_log[k] = norm(A*x - b)/norm(b);
     end
