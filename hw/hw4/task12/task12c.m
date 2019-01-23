@@ -1,6 +1,6 @@
 close all; clear;
 %Solution to task 12 c), homework 4, numerical linear algebra
-%Anna Broms 2019-01-19
+%Anna Broms 2019-01-21
 g = @(x,y,alpha) alpha*sqrt((x-0.5).^2+(y-0.5).^2);
 f = @(x,y) abs(x-y);
 m = 100;

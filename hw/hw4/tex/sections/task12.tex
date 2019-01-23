@@ -50,8 +50,8 @@ f(x_i,y_m)
 \end{equation}
 
 
-Observe that this is the vecorized form of the equation \eqref{lyapPDE}, where
-$D_{xx}$ is a $m\times m$ matrix with -2 on the main diagonal and -1 on the sub- and superdiagonals, $G = g(x_i,y_j)$ and $F = f(x_i,y_j)$. 
+Observe that this is the vectorized form of the equation \eqref{lyapPDE}, where
+$D_{xx}$ is a $m\times m$ matrix with -2 on the main diagonal and -1 on the sub- and superdiagonals, $G =h^2\cdot g(x_i,y_j)$ and $F = h^2\cdot f(x_i,y_j)$. 
 \subsection*{(b)}
 \emph{Derive explicit expressions for the eigenvalues of $I\otimes D_{xx}+D_{xx}\otimes I$ in the limit $m\to\infty$ and show that the matrix $I\otimes D_{xx}+D_{xx}\otimes I$ is non-singular in the limit.}
 
@@ -129,13 +129,40 @@ for sufficiently small $\|E\|$. The matrix $E$ is diagonal, having only the valu
 \subsection*{(e)}
 \emph{Suppose all elements of the matrix $G$ are zero except $G_{m/4,m/2} = 1/h$, where $m\in 4\mathbb Z$. Solve the equation efficiently by using the \texttt{lyap} command.}
 
-We consider the problem as a rank-one modification and use the Sherman-Morrison-Woodbury formula, stating that if $C$ is an invertible square matrix and $u$, $v$ are column vectors of the same size, then $C+uv^T$ is invertible iff $1+v^TC^{-1}u\neq 0$. The inverse is given by
+We consider the problem as a rank-one modification and use the Sherman-Morrison-Woodbury formula, stating that if $A$ is an invertible square matrix and $u$, $v$ are column vectors of the same size, then $A+uv^T$ is invertible iff $1+v^TA^{-1}u\neq 0$. The inverse is given by
 \begin{equation}
-(C+uv^T)^{-1} = C^{-1}-\frac{C^{-1}uv^TC^{-1}}{1+v^TC^{-1}u}.
+(A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}.
 \end{equation}
-Using $u = e_{m/4}$ and $v  = (1/h)e_{m/2}$, we can then compute 
+%Using $u = e_{m/4}$ and $v  = (1/h)e_{m/2}$, we can then compute 
+We want to solve a large and sparse linear system of the form 
+\begin{equation}\label{orig}
+(A+\tilde{G})x = b,
+\end{equation}
+where $\tilde{G}$ is the sparse matrix putting the values of the matrix G on the diagal columnwise. 
+Using that $\tilde{G} = uv^T$, we obtain
+\begin{equation}\label{woodbury}
+(A+\tilde{G})x = b\quad\Leftrightarrow\quad (A+uv^T)x = b
+\quad\Leftrightarrow x=(A-uv^T)^{-1}b.
+\end{equation}
+Now, applying the Sherman-Morrison-Woodbury formula, \eqref{woodbury} can be rewritten as
+\begin{equation}
+x=(A-uv^T)^{-1}b = A^{-1}b-\frac{A^{-1}uv^TA^{-1}b}{1+v^TA^{-1}u}.
+\end{equation}
+We identify that for the specified matrix $G$, $u =e_{(m/2-1)m+m/4}$ and $v = (1/h)\cdot e_{(m/2-1)m+m/4}$. The problem thus boils down to solving a lyapunov equation twice with different right hand sides and then vectorize the results. In pseudo-code, we compute
+\begin{equation}
+\begin{aligned}
+&\alpha = \texttt{lyap}(T,-F);\\
+&\alpha = \alpha(:);\\
+&\beta = \texttt{lyap}(T,-e_{(m/2-1)m+m/4});\\
+&\beta = \beta(:).
+\end{aligned}
+\end{equation}
+Then, 
+\begin{equation}
+x=(A-uv^T)^{-1}b  = \alpha -\frac{\beta(v^T\alpha)}{1+v^T\beta}.
+\end{equation}
 
-A naive approach representing $G$ as a matrix to form the matrix $A$ described in task (a), and then using $\backslash$ to solve yields 
+We compare with a naive approach solving \eqref{orig} using $\backslash$. Using $m=100$, the 2-norm difference between the solutions is $1.37\times 10^{-12}$. 
 
 
 
