@@ -1,6 +1,6 @@
-using LinearAlgebra
+#using LinearAlgebra
 
-function compDiff_exp(ε)
+function compDiff_exp(ε::Float64)
     g = z -> exp(z)
     A = [π 1; 0  π+ε]
     λ1,λ2 = eigvals(A)
@@ -14,5 +14,6 @@ function compDiff_exp(ε)
     f = p(A)
     # Equivalent expression
     # p = z -> g(λ1) .* I + g(λ1)/ε * (1 - g(ε)) * (π*I - z)
+    println(3)
     return norm(f-F),norm(f-exp(A)),norm(F-exp(A))
 end
