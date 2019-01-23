@@ -1,3 +1,113 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw3_report.tex
+Consider the PDE 
+\begin{equation}
+\begin{aligned}
+\Delta u+g(x,y)u &= f(x,y),\text{ for }x,y\in\Omega,\\
+u(x,y) & = 0,\text{ for }x,y\in\partial\Omega,
+\end{aligned}
+\end{equation}
+where $\Omega$ is the unit square. 
+\subsection*{(a)}
+\emph{Derive the 2nd order finite-difference discretization for the grid $x_i = hi, i = 1,\dots,m,y_j = hj,j = 1,\dots,m$ and $h = 1/(m+1)$. Also, derive matrices such that the discretizatioin can be expressed as 
+\begin{equation}\label{lyapPDE}
+D_{xx}U+UD_{xx}+G\circ U = F, 
+\end{equation}
+where $U_{i,j} \approx u(x_i,y_j)$. }
+
+Using a 2nd order approximation of the second derivatives 
+\begin{equation}
+\frac{\partial^2 f}{\partial x^2} = \frac{f(x+h)-2f(x)+f(x-h)}{h^2}
+\end{equation}
+and similarly for $\frac{\partial^2 f}{\partial y^2}$, we can approximate the laplacian by the five point stencil 
+\begin{equation}
+\Delta u_{i,j} \approx \frac{u_{i-1,j}-4u_{i,j}+u_{i+1,j}+u_{i,j-1}+u_{i,j+1}}{h^2},
+\end{equation}
+for $i = 1,2,\dots,m$ and $j = 1,2,\dots,m$.
+From the boundary condition, we have
+\begin{equation}
+u_{0,j} = u_{m+1,j}=u_{i,0} = u_{m+1,0} = 0.
+\end{equation}  
+The structure for the Laplace operator alone is thus the $m^2\times m^2$ matrix
+\begin{equation}\label{tridiag}
+\begin{bmatrix}
+T &I &0 &\dots& 0\\
+I & T& I & \dots \\
+\vdots &\vdots& \vdots &\vdots& \vdots\\
+0 & 0 & 0 &I& T
+\end{bmatrix}
+\end{equation}
+with $T$ being the $m\times m$ matrix with $-4$ on the diagonal, 1 on the sub- and super-diagonals and zero otherwise. 
+The entire system for the PDE can be written on the form $Au = b$, where $A$ has the same structure as the matrix in \eqref{tridiag}, but where the diagonal is given by matrices $B_1,B_2,\dots, B_m$, where $B_j = T+h^2\cdot GG_j$, with $GG_j$ having values only on the main diagonal taking the values $g(x_i,y_j)$, $i=1,\dots,m$. The right hand side vector $b$ is given by 
+\begin{equation}
+b = h^2
+\begin{bmatrix}
+f(x_i,y_1)\\
+f(x_i,y_2)\\
+\vdots\\
+f(x_i,y_m)
+\end{bmatrix}.
+\end{equation}
+
+
+Observe that this is the vecorized form of the equation \eqref{lyapPDE}, where
+$D_{xx}$ is a $m\times m$ matrix with -2 on the main diagonal and -1 on the sub- and superdiagonals, $G = g(x_i,y_j)$ and $F = f(x_i,y_j)$. 
+\subsection*{(b)}
+\emph{Derive explicit expressions for the eigenvalues of $I\otimes D_{xx}+D_{xx}\otimes I$ in the limit $m\to\infty$ and show that the matrix $I\otimes D_{xx}+D_{xx}\otimes I$ is non-singular in the limit.}
+
+First, we identify that the matrix $I\otimes D_{xx}+D_{xx}\otimes I$ is the finite difference approximation of the laplace operator. In the limit $m\to\infty$, the approximation approaches the continuous laplace operator. Therefore, we seek eigenvalues
+\begin{equation}
+\Delta u = \lambda u.
+\end{equation} 
+Writing $u$ as $u(x,y) = X(x)Y(y)$, we get the equation
+\begin{equation}
+X''+Y'' = \lambda XY \Leftrightarrow \frac{X''}{X}+\frac{Y''}{Y} = \lambda,
+\end{equation}
+enforcing that for some constants $\alpha$ and $\beta$, 
+\begin{equation}
+X''=\alpha X\text{ and }Y'' = \beta Y.
+\end{equation}
+Solving these equations along with the homogeneous boundary conditions, we obtain that 
+\begin{equation}
+\lambda = (k\pi)^2+(l\pi)^2,\quad k,l = 1,2,3,...
+\end{equation}
+The equations for $X(x)$ and $Y(y)$ has no nontrivial solutions for $\lambda =0$ and thus it can be concluded the matrix is non-singular. 
+\subsection*{(c)}
+\emph{Let 
+\begin{equation}
+g(x,y) = \alpha\sqrt{(x-\frac{1}{2})^2+(y-\frac{1}{2})^2}
+\end{equation}
+and $f(x,y)= |x-y|$.}
+\begin{enumerate}
+\item Let $\alpha = 0$ and solve the sparse linear system $Au = b$ using $\backslash$. 
+\item We compare the above with solving the equation using the matlab command \texttt{lyap}.
+\item Let $\alpha = 1$ and solve with $\backslash$
+\item Again, let $\alpha = 1$, but use instead \texttt{gmres} to solve the system.
+\item Using $\alpha = 1$ and \texttt{gmres}, use \texttt{lyap} as a left pre-conditioner. 
+\item Using $\alpha = 0.1$ and \texttt{gmres}, use \texttt{lyap} as a left pre-conditioner. 
+\end{enumerate}
+
+\subsection*{(d)}
+\emph{Explain the performance in (c) of the the preconditioned gmres. 
+}
+Consider $A-E$ to be the matrix $A$ obtained by choosing $\alpha = 0$. Then, from the hint in the lecture notes, 
+\begin{equation}
+(A-E)^{-1} = A^{-1}-A^{-1}EA^{-1}+\mathcal O(\|E\|^2),
+\end{equation}
+for sufficiently small $\|E\|$. The matrix $E$ is diagonal, and therefore, $\|E\|_2 = \max(g(x_i,y_2))<\alpha \sqrt{2}/2$. Thus, using the solution from the lyap command (with $\alpha = 0$) as a pre-conditioner, the preconditioner is very close to being the inverse of the matrix $A$ where e.g. $\alpha = 0.1$. The consequence is clearly that gmres converges in few iterations. 
+
+\subsection*{(e)}
+\emph{Suppose all elements of the matrix $G$ are zero except $G_{m/4,m/2} = 1/h$, where $m\in 4\mathbb Z$. Solve the equation efficiently by using the \texttt{lyap} command.}
+
+We consider the problem as a rank-one modification and use the Sherman-Morrison-Woodbury formula, stating that if $C$ is an invertible square matrix and $u$, $v$ are column vectors of the same size, then $C+uv^T$ is invertible iff $1+v^TC^{-1}u\neq 0$. The inverse is given by
+\begin{equation}
+(C+uv^T)^{-1} = C^{-1}-\frac{C^{-1}uv^TC^{-1}}{1+v^TC^{-1}u}.
+\end{equation}
+Using $u = e_{m/4}$ and $v  = (1/h)e_{m/2}$, we can then compute 
+
+A naive approach representing $G$ as a matrix to form the matrix $A$ described in task (a), and then using $\backslash$ to solve yields 
+
+
+
+
 
