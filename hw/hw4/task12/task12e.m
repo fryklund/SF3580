@@ -11,7 +11,7 @@ g = @(x,y,alpha) alpha*sqrt((x-0.5).^2+(y-0.5).^2);
 alpha = 0;
 M = [20:20:200];
 
-for j = 1:10
+for j = 1:10 %keep for-loop only to time the different options
     m = M(j);
     [A,b,X,Y,h] = construct_poisson_matrices(f,g,m,alpha);
     G = spalloc(m^2,m^2,1);
@@ -23,8 +23,8 @@ for j = 1:10
     end
     t_elapsed1(j) = toc(tstart)/10;
     X1 = reshape(x1,m,m);
-    %%
-    %Solve using Sherman-Morrison
+%%
+ %Solve using Sherman-Morrison
     U = spalloc(m^2,1,1);
     U((m/2-1)*m+m/4) = 1;
     U = reshape(U,m,m);
