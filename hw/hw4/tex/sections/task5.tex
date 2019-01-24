@@ -32,21 +32,21 @@ c_{11}D & \cdots & c_{1n_{C}}D\\
 c_{k1}D & \cdots & c_{kn_{C}}D
 \end{bmatrix}\\
  &= \begin{bmatrix}
-\sum\limits_{k}^{i = 1}a_{1i}c_{i1}BD & \cdots & \sum\limits_{k}^{i = 1}a_{1i}c_{in_{C}}BD\\
+\sum\limits_{k}^{i = 1}a_{1i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{1i}c_{in_{C}}BD\\
 \vdots & \ddots & \vdots\\
-\sum\limits_{k}^{i = 1}a_{m_{A}i}c_{i1}BD & \cdots & \sum\limits_{k}^{i = 1}a_{m_{A}i}c_{in_{C}}BD
+\sum\limits^{k}_{i = 1}a_{m_{A}i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{in_{C}}BD
 \end{bmatrix}
 \end{align*}
 where the matrix product $CD$ is well defined. Finally consider the right hand side of \eqref{eq:kron}
 \begin{align*}
   (AC)\otimes (BD) &= \begin{bmatrix}
- \sum\limits_{k}^{i = 1}a_{1i}c_{i1} & \cdots & \sum\limits_{k}^{i = 1}a_{1i}c_{in_{C}}\\
+ \sum\limits^{k}_{i = 1}a_{1i}c_{i1} & \cdots & \sum\limits^{k}_{i = 1}a_{1i}c_{in_{C}}\\
  \vdots & \ddots & \vdots\\
- \sum\limits_{k}^{i = 1}a_{m_{A}i}c_{i1} & \cdots & \sum\limits_{k}^{i = 1}a_{m_{A}i}c_{in_{C}}
+ \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{i1} & \cdots & \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{in_{C}}
  \end{bmatrix} \otimes (BD)\\
  &=  \begin{bmatrix}
-\sum\limits_{k}^{i = 1}a_{1i}c_{i1}BD & \cdots & \sum\limits_{k}^{i = 1}a_{1i}c_{in_{C}}BD\\
+\sum\limits^{k}_{i = 1}a_{1i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{1i}c_{in_{C}}BD\\
 \vdots & \ddots & \vdots\\
-\sum\limits_{k}^{i = 1}a_{m_{A}i}c_{i1}BD & \cdots & \sum\limits_{k}^{i = 1}a_{m_{A}i}c_{in_{C}}BD
+\sum\limits^{k}_{i = 1}a_{m_{A}i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{in_{C}}BD
 \end{bmatrix} = (A\otimes B)(C\otimes D) .
 \end{align*}
