@@ -26,11 +26,12 @@ function [A,b,XX,YY,h] = construct_poisson_matrices(f,g,m,alpha)
     %spy(C);
     A = (C+II)*(1/h^2);
     %spy(A)
-
-    gg = g(x',y,alpha);
-    G  = spdiags(gg(:),0,m^2,m^2); 
-    A = A+G;
+    if alpha >0
+        gg = g(x',y,alpha);
+        G  = spdiags(gg(:),0,m^2,m^2); 
+        A = A+G;
+    end
     %figure(4)
-    %imagesc(A)
+    %imagesc(A) %Investigates the structure of A. 
 
 end
