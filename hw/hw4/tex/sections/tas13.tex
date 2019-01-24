@@ -2,3 +2,15 @@
 %!TEX root = ../hw4_report.tex
 
 \subsection{$(a)$}
+Consider the approximate solution $X_{k} = V_{k}Y_{k}V_{k}^{T}$ for the Lyapunov equation
+\begin{equation}
+  AX+XA^{T} + BB^{T} = 0,
+\end{equation}
+where the columns of $V_{k}$ spans the subspace $K_{k}$ of $\mathbb{R}^{n}$. The columns are orthonormal. Furthermore, let $B = V_{K}E$ for some $E$. Introduce the residual
+\begin{equation}
+  R_{k} = AX_{k}+XA_{k}^{T} + BB^{T}
+\end{equation}
+and impose the it is orthogonal to $K$, i.e.
+\begin{equation}
+  V_{k}^{T}R_{k}V_{k} = 0 \Leftirghtarrow V_{k}^{T}AV_{k}Y_{k}V_{k}^{T}V_{k}+V_{k}^{T}V_{k}Y_{k}V_{k}^{T}A_{k}^{T}V_{k} + EE^{T} = 0
+\end{equation}
