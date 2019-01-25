@@ -1,5 +1,5 @@
 %!TeX spellcheck = en-US
-%!TEX root = ../hw3_report.tex
+%!TEX root = ../hw4_report.tex
 Consider the PDE
 \begin{equation}
 \begin{aligned}
@@ -71,7 +71,7 @@ Solving these equations along with the homogeneous boundary conditions, we obtai
 \begin{equation}
 \lambda = (k\pi)^2+(l\pi)^2,\quad k,l = 1,2,3,...
 \end{equation}
-The equations for $X(x)$ and $Y(y)$ has no nontrivial solutions for $\lambda =0$ and thus it can be concluded the matrix is non-singular.
+The equations for $X(x)$ and $Y(y)$ have no nontrivial solutions for $\lambda =0$ and thus it can be concluded that the matrix is non-singular.
 \subsection*{(c)}
 Letting
 \begin{equation}
@@ -108,7 +108,7 @@ A left preconditioner is a matrix $M$ modyfing  the system $Au = b$ such that th
 
 \item Using $\alpha = 0.1$ and \texttt{gmres}, use \texttt{lyap} as a left pre-conditioner.
 
-We compare the computational time for an average of 10 solves using $\backslash$ and $\alpha = 1$, pre-conditioned \texttt{gmres} and $\alpha=1$ and pre-conditioned \texttt{gmres} and $\alpha = 0.1$. The result is visualised in Figure \ref{time12_2}. It can be concluded that the pre-conditioned gmres performes better in terms of computation time for $\alpha = 0.1$ than for $\alpha = 1$. It should also be noted that solving with backslash is faster than using gmres, which might be due to how we have chosen to construct the preconditioner-function.
+We compare the computational time for an average of 10 solves using $\backslash$ and $\alpha = 1$, pre-conditioned \texttt{gmres} and $\alpha=1$ and pre-conditioned \texttt{gmres} and $\alpha = 0.1$. The result is visualised in Figure \ref{time12_2}. It can be concluded that the pre-conditioned \texttt{gmres} performes better in terms of computation time for $\alpha = 0.1$ than for $\alpha = 1$. It should also be noted that solving with backslash is faster than using gmres, which might be due to how we have chosen to construct the preconditioner-function.
 \end{enumerate}
 \begin{figure}[h!]
 \centering

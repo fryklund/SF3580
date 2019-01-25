@@ -1,11 +1,6 @@
 %!TeX spellcheck = en-US
 %!TEX root = ../hw4_report.tex
-Let $A\in \mathbb{R}^{m_{A}\times k}$, $B\in \mathbb{R}^{m_B\times p}$, $C\in \mathbb{R}^{k\times n_{C}}$ and $D\in \mathbb{R}^{p\times n_{D}}$. Then the matrices $A$, $B$, $C$ and $D$ are of  compatible size such that they satisfy the left hand side of
-\begin{equation}
-  \label{eq:kron}
-  (A\otimes B)(C\otimes D) = (AC)\otimes (BD)
-\end{equation}
-is satisfied. This is shown by first computing $  (A\otimes B)$ and $  (C\otimes D)$:
+Let $A\in \mathbb{R}^{m_{A}\times k}$, $B\in \mathbb{R}^{m_B\times p}$, $C\in \mathbb{R}^{k\times n_{C}}$ and $D\in \mathbb{R}^{p\times n_{D}}$. Then the matrices $A$, $B$, $C$ and $D$ are of  compatible size such that they satisfy $(A\otimes B)(C\otimes D)$ and $(AC)\otimes (BD)$. We show that $(A\otimes B)(C\otimes D) = (AC)\otimes (BD)$ by first computing $  (A\otimes B)$ and $  (C\otimes D)$:
 \begin{align*}
   (A\otimes B) = \begin{bmatrix}
 a_{11}B & \cdots & a_{1k}B\\
@@ -32,12 +27,12 @@ c_{11}D & \cdots & c_{1n_{C}}D\\
 c_{k1}D & \cdots & c_{kn_{C}}D
 \end{bmatrix}\\
  &= \begin{bmatrix}
-\sum\limits_{k}^{i = 1}a_{1i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{1i}c_{in_{C}}BD\\
+\sum\limits^{k}_{i = 1}a_{1i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{1i}c_{in_{C}}BD\\
 \vdots & \ddots & \vdots\\
 \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{in_{C}}BD
 \end{bmatrix}
 \end{align*}
-where the matrix product $CD$ is well defined. Finally consider the right hand side of \eqref{eq:kron}
+where the matrix product $CD$ is well defined. Now consider the right hand side of \eqref{eq:kron}
 \begin{align*}
   (AC)\otimes (BD) &= \begin{bmatrix}
  \sum\limits^{k}_{i = 1}a_{1i}c_{i1} & \cdots & \sum\limits^{k}_{i = 1}a_{1i}c_{in_{C}}\\
@@ -50,3 +45,4 @@ where the matrix product $CD$ is well defined. Finally consider the right hand s
 \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{i1}BD & \cdots & \sum\limits^{k}_{i = 1}a_{m_{A}i}c_{in_{C}}BD
 \end{bmatrix} = (A\otimes B)(C\otimes D) .
 \end{align*}
+Thus we have $(A\otimes B)(C\otimes D) = (AC)\otimes (BD)$.
